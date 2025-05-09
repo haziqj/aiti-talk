@@ -1,7 +1,30 @@
 ---
-title: "aiti-talk"
+title: An introduction to R
+subtitle: AITI Talk
+format:
+  ubd40-revealjs:
+    # self-contained: false
+    # chalkboard: true
+    # toc: true
+    # toc-depth: 1
+    transition: fade
+    auto-stretch: false
+    width: 1250  # 1050
+    height: 760  # 700
+    self-contained: false
+    chalkboard: true
+    toc: false
+    toc-depth: 1
+    multiplex: true
+    code-block-height: 700px
+    # html-table-processing: none
+author:
+  - name: Haziq Jamil
+    orcid: 0000-0003-3298-1010
+    email: haziq.jamil@ubd.edu.bn
+    affiliations: Universiti Brunei Darussalam
+date: 2025-05-21
+# bibliography: refs.bib
+execute:
+  freeze: auto
 ---
-
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
