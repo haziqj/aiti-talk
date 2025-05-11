@@ -1,34 +1,23 @@
----
-title: "Sample report AITI"
-author: "Haziq Jamil"
-format: 
-  html:
-    code-fold: true
----
-
-## Preamble
-
-```{r}
-#| label: setup
-#| message: false
 library(tidyverse)  # data wrangling tools
 library(tidytext)   # bigrams
 library(tm)         # text mining
 library(wordcloud)  # word clouds
 
+## ----- Load data -------------------------------------------------------------
 dat <- read_csv("fake_survey.csv")
-```
+glimpse(dat)
 
-## Demography
+# 1. how to load data sets
+# 2. 
+
+## ----- Summary tables --------------------------------------------------------
 
 
 
 
 
-## Word clouds
 
-```{r}
-#| warning: false
+## ----- Word clouds -----------------------------------------------------------
 corpus <- 
   Corpus(VectorSource(dat$q_limiting)) |>
   tm_map(content_transformer(tolower)) |>
@@ -54,9 +43,8 @@ wordcloud(
   random.order = FALSE,         # plot most frequent words in center
   colors     = RColorBrewer::brewer.pal(8, "Dark2")
 )
-```
 
-```{r}
+## ----- Bigrams ---------------------------------------------------------------
 bigram_counts <- 
   tibble(text = dat$q_limiting)  |>
   unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
@@ -67,10 +55,10 @@ bigram_counts <-
   filter(!bigram %in% c("wi fi")) |>
   mutate(bigram = str_replace_all(bigram, "wi fi", "wifi"))
 
-# Adjust a bit
-bigram_counts$n[2] <- bigram_counts$n[1] + bigram_counts$n[2]
+bigram_counts$n[2] <- bigram_counts$n[1] + bigram_counts$n[2]  # Adjust a bit
 bigram_counts <- bigram_counts[-1, ]
 
+# combine certain bigrams
 for (big in c("internet plan", "video call")) {
   idx <- which(grepl(big, bigram_counts$bigram))
   bigram_counts$n[idx[1]] <- sum(bigram_counts$n[idx])
@@ -85,4 +73,3 @@ wordcloud(
   random.order = FALSE,
   colors       = brewer.pal(8, "Dark2")
 )
-```

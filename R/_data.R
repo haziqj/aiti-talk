@@ -1,3 +1,4 @@
+# This script creates the fake survey data for the AITI talk.
 library(tidyverse)
 library(bruneimap)
 library(ellmer)
@@ -11,8 +12,8 @@ mukims <- unique(hsp$mukim)
 #   geom_sf(aes(fill = price)) +
 #   scale_fill_viridis_c()
 
-# Settings
-n <- 2000
+## ----- Settings --------------------------------------------------------------
+n <- 2000  # Sample size
 
 # Demography
 set_gender <- c(Male = 0.5, Female = 0.5)
@@ -51,7 +52,6 @@ q_limiting <- c(
   `Complicated process of billing` = 0.08,
   `Devices does not support new technology` = 0.03
 )
-
 q_fbspeed <- c(
   `700-1000` = 0.08,
   `250-700` = 0.06,
@@ -192,17 +192,15 @@ dat <-
       arrange(desc(population))
   )
 
-dat |>
-  summarise(expend = mean(q_fbexpend), .by = mukim) |>
-  right_join(x = mkm_sf) |>
-  ggplot() +
-  geom_sf(data = brn_sf) +
-  geom_sf(aes(fill = expend)) +
-  scale_fill_viridis_c(option = "magma", labels = scales::dollar, name = "Mean\nmonthly\nexpenditure") +
-  theme_minimal()
+# dat |>
+#   summarise(expend = mean(q_fbexpend), .by = mukim) |>
+#   right_join(x = mkm_sf) |>
+#   ggplot() +
+#   geom_sf(data = brn_sf) +
+#   geom_sf(aes(fill = expend)) +
+#   scale_fill_viridis_c(option = "magma", labels = scales::dollar, name = "Mean\nmonthly\nexpenditure") +
+#   theme_minimal()
 
-
-  
 # Generate comments
 res <- map_chr(dat$q_limiting, \(x) {
   chat <- chat_ollama(
@@ -227,73 +225,10 @@ Now, given the factor label after the prompt, generate a matching user comment.'
 }, .progress = TRUE)
 dat$q_limiting2 <- res
 
-# Cleanup
+## ----- Cleanup and export ----------------------------------------------------
 dat <- 
   arrange(dat, id) |>
   select(-population, -q_limiting) |>
   rename(q_limiting = q_limiting2) |>
   select(id, kampong, mukim, district, everything())
 write_csv(dat, file = "fake_survey.csv")
-
-# Wordcloud
-library(tm)
-library(wordcloud)
-library(RColorBrewer)
-corpus <- Corpus(VectorSource(dat$q_limiting))
-
-# 4. Clean the text
-corpus <- tm_map(corpus, content_transformer(tolower))       
-corpus <- tm_map(corpus, removePunctuation)                  
-corpus <- tm_map(corpus, removeNumbers)                      
-corpus <- tm_map(corpus, removeWords, c(stopwords("en"), "just", "really", "get", "ive", "every"))
-corpus <- tm_map(corpus, stripWhitespace)     
-# corpus <- tm_map(corpus, stemDocument, language = "en")
-
-# 5. Create a term‐document matrix and get word frequencies
-tdm <- TermDocumentMatrix(corpus)
-m   <- as.matrix(tdm)
-freq <- sort(rowSums(m), decreasing = TRUE)
-word_freqs <- data.frame(word = names(freq), freq = freq)
-
-# 6. Plot the word cloud
-set.seed(123)  # for reproducibility
-wordcloud(
-  words      = word_freqs$word,
-  freq       = word_freqs$freq,
-  min.freq   = 2,               # only words with freq >= 2
-  max.words  = 100,             # draw up to 100 words
-  random.order = FALSE,         # plot most frequent words in center
-  colors     = brewer.pal(8, "Dark2")
-)
-
-# Bigrams
-library(tidytext)
-
-bigram_counts <- 
-  tibble(text = dat$q_limiting)  |>
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) |>
-  separate(bigram, into = c("word1", "word2"), sep = " ") |>
-  filter(!word1 %in% stop_words$word, !word2 %in% stop_words$word) |>
-  unite(bigram, word1, word2, sep = " ") |>
-  count(bigram, sort = TRUE) |>
-  filter(!bigram %in% c("wi fi")) |>
-  mutate(bigram = str_replace_all(bigram, "wi fi", "wifi"))
-
-# Adjust a bit
-bigram_counts$n[2] <- bigram_counts$n[1] + bigram_counts$n[2]
-bigram_counts <- bigram_counts[-1, ]
-
-for (big in c("internet plan", "video call")) {
-  idx <- which(grepl(big, bigram_counts$bigram))
-  bigram_counts$n[idx[1]] <- sum(bigram_counts$n[idx])
-  bigram_counts <- bigram_counts[-idx[-1], ]
-}
-
-wordcloud(
-  words        = bigram_counts$bigram,
-  freq         = bigram_counts$n,
-  min.freq     = 2,
-  max.words    = 100,
-  random.order = FALSE,
-  colors       = brewer.pal(8, "Dark2")
-)
