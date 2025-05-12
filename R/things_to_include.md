@@ -60,7 +60,7 @@ expectation
 
 Excellent; V Good; Good; Fair; Poor; V Poor
 
-MOBILE: 10, 28, 30, 34, 17, 4, 1
+MOBILE:    10, 28, 30, 34, 17, 4, 1
 BROADBAND: 10, 28, 34, 20, 6, 2
 
 6. Histogram/Density plot/Ridge plot of data usage 
@@ -112,6 +112,9 @@ reverse::: V CHEAP; CHEAP; Just RIGHT; Expensive; V Expensive
 HOME: 69, 69, 90, 66, 98
 WORK: 39, 46, 34, 48, 72
 SCHOOL: 23, 25, 48, 15, 37
+
+
+0.95 = 
 
 
 5a. Reproduce with sankey bump
