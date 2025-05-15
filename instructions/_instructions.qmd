@@ -1,13 +1,13 @@
 ---
 title: "🛠 Machine Setup"
-output: html_document
+format: 
+  html: 
+    embed-resources: true
+  pdf: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-Welcome! Prior to attending the workshop, please ensure you have done the following.
+Welcome! Prior to attending the seminar talk, please ensure you have done the following.
 
 # 1. Install R **and** RStudio
 
@@ -51,8 +51,8 @@ b. Install the following R packages by running the following code in the `consol
 #| code-fold: false
 install.packages(c(
   "tidyverse", 
-  "readr",
-  "ggplot2"
+  "tinyplot",
+  "bruneimap"
 ))
 ```
 
