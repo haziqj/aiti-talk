@@ -15,15 +15,15 @@ No prior knowledge of R is required.
 
 ## Schedule
 
-Date: Wednesday 21 May 2025
+Date: Wednesday 21 May 2025  
 Time: 8.30am-12.00pm
 
 
-8.30am--9.00am: Intro & Admin
-9.00am--10.00am: Lecture 1 (Getting started with R and basic statistics)
-10.00am--10.30am: Break
-10.30am--11.30am: Lecture 2 (Reproducible research using Quarto)
-11.30am--12.00pm: Networking
+8.30am--9.00am: Intro & Admin 
+9.00am--10.00am: Lecture 1 (Getting started with R and basic statistics) 
+10.00am--10.30am: Break 
+10.30am--11.30am: Lecture 2 (Reproducible research using Quarto) 
+11.30am--12.00pm: Networking 
 
 ## Facilitators
 
