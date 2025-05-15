@@ -36,6 +36,7 @@ Assistants:
 
 (To be updated)
 
-1. Lecture slides
-2. R code 
-3. Sample report
+1. Instructions ([html](https://haziqj.ml/aiti-talk/instructions/), [pdf](https://haziqj.ml/aiti-talk/instructions/instructions.pdf))
+2. Lecture slides
+3. R code 
+4. Sample report
