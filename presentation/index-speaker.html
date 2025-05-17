@@ -190,6 +190,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -410,11 +413,116 @@ $ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 
 $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
 </div>
 </div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Demographic vs study questions</strong></p>
+</div>
+<div class="callout-content">
+<p>Usually, a survey contains two types of question: 1) Demographic, and 2) study questions.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="data-types" class="slide level2">
 <h2>Data types</h2>
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    A[**Data Type**]
+    
+    A --&gt; B["**Logical**&lt;br&gt;&lt;br&gt;e.g. TRUE, FALSE"]
+    A --&gt; C[**Numeric**]
+    A --&gt; D["**Complex**&lt;br&gt;&lt;br&gt;e.g. 1+2i, 3+4i"]
+    A --&gt; E["**Character**&lt;br&gt;&lt;br&gt;e.g. 'cat', 'blue'"]
+    
+    C --&gt; CA["**Integer**&lt;br&gt;&lt;br&gt;e.g. 1L, 314L"]
+    C --&gt; CB["**Double**&lt;br&gt;&lt;br&gt;e.g. 1.23, 3.141"]
+    
+    E --&gt; EA["**Factor**&lt;br&gt;&lt;br&gt;e.g. 'MOE', 'MTIC', 'MOH'"]
+    E --&gt; EB["**Ordered**&lt;br&gt;&lt;br&gt;e.g. 'Disagree', 'Neutral',&lt;br&gt;'Agree'"]
+    
+    %% Assign nodes to classes
+    class EA pink
+    class EB pink
+
+    %% Define styles for the classes
+    classDef pink fill:#f9c,color:#fff,stroke:#333,stroke-width:1px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Know your data types</strong></p>
+</div>
+<div class="callout-content">
+<p>We must know the data types of our variables to perform the correct operations on them. For example, if we want to calculate the mean of a variable, it must be numeric. If it is a factor/ordered, we need to convert it to numeric first.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="tidy-data" class="slide level2">
+<section id="transforming-data" class="slide level2 scrollable">
+<h2>Transforming data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>dat <span class="ot">&lt;-</span></span>
+<span id="cb11-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-4"><a href=""></a>    <span class="co"># Convert education to factors</span></span>
+<span id="cb11-5"><a href=""></a>    <span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb11-6"><a href=""></a>      <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>,</span>
+<span id="cb11-7"><a href=""></a>      <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>,</span>
+<span id="cb11-8"><a href=""></a>      <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
+<span id="cb11-9"><a href=""></a>    )),</span>
+<span id="cb11-10"><a href=""></a>    <span class="co"># Convert Likert scale to ordered factors</span></span>
+<span id="cb11-11"><a href=""></a>    <span class="fu">across</span>(<span class="fu">c</span>(q_mbqual, q_fbqual), <span class="cf">function</span>(x) <span class="fu">ordered</span>(x, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb11-12"><a href=""></a>      <span class="st">"Very Poor"</span>, <span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span></span>
+<span id="cb11-13"><a href=""></a>    )))</span>
+<span id="cb11-14"><a href=""></a>  )</span>
+<span id="cb11-15"><a href=""></a></span>
+<span id="cb11-16"><a href=""></a><span class="fu">glimpse</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="transforming-data-output" class="slide level2 scrollable output-location-slide"><h2>Transforming data</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,000
+Columns: 13
+$ id         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ kampong    &lt;chr&gt; "Kg. Lorong Tiga Selatan", "Kg. Anggerek Desa", "Kg. Bebati…
+$ mukim      &lt;chr&gt; "Mukim Seria", "Mukim Berakas A", "Mukim Pangkalan Batu", "…
+$ district   &lt;chr&gt; "Belait", "Brunei-Muara", "Brunei-Muara", "Belait", "Brunei…
+$ gender     &lt;chr&gt; "Female", "Male", "Female", "Male", "Male", "Female", "Male…
+$ age        &lt;dbl&gt; 47, 38, 42, 47, 50, 33, 54, 38, 33, 38, 18, 39, 33, 25, 53,…
+$ education  &lt;fct&gt; O Level, O Level, O Level, Higher National Diploma, Bachelo…
+$ q_fbspeed  &lt;dbl&gt; 54, 58, 711, 56, 187, 58, 55, 88, 888, 146, 20, 37, 53, 192…
+$ q_fbqual   &lt;ord&gt; Fair, Very Good, Poor, Very Good, Good, Fair, Very Good, Ve…
+$ q_mbqual   &lt;ord&gt; Poor, Good, Good, Good, Good, Good, Good, Fair, Very Poor, …
+$ q_fbexpend &lt;dbl&gt; 782, 53, 744, 53, 635, 617, 34, 601, 590, 34, 588, 8, 574, …
+$ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 190,…
+$ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">head</span>(<span class="fu">as.numeric</span>(dat<span class="sc">$</span>q_mbqual), <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2 4 4 4 4 4 4 3 1 5 4 5 6 4 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">head</span>(<span class="fu">as.numeric</span>(dat<span class="sc">$</span>kampong), <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
+</div>
+</div></section><section id="tidy-data" class="slide level2">
 <h2>Tidy data</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -465,39 +573,26 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <li>Objectives</li>
 </ul>
 </section>
-<section id="importing-data-1" class="slide level2">
-<h2>Importing data</h2>
-</section>
-<section id="data-types-1" class="slide level2">
-<h2>Data types</h2>
-<ul>
-<li>Numeric (continuous vs integer)</li>
-<li>Logical</li>
-<li>Character</li>
-<li>Factors</li>
-<li>Ordered</li>
-</ul>
-</section>
 <section id="summary-statistics" class="slide level2">
 <h2>Summary statistics</h2>
 <h3 id="continuous-data">Continuous data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>x <span class="ot">&lt;-</span> dat<span class="sc">$</span>age</span>
-<span id="cb11-2"><a href=""></a><span class="fu">head</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>x <span class="ot">&lt;-</span> dat<span class="sc">$</span>age</span>
+<span id="cb17-2"><a href=""></a><span class="fu">head</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 47 38 42 47 50 33</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Mean and standard deviation</span></span>
-<span id="cb13-2"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="co"># Mean and standard deviation</span></span>
+<span id="cb19-2"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 38.537</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.96885</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="co"># Quick summary of the data</span></span>
-<span id="cb17-2"><a href=""></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="co"># Quick summary of the data</span></span>
+<span id="cb23-2"><a href=""></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   10.00   29.00   39.00   38.54   47.00   69.00 </code></pre>
@@ -507,35 +602,8 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <section id="histograms" class="slide level2">
 <h2>Histograms</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">tinyplot</span>(x, <span class="at">type =</span> <span class="st">"histogram"</span>, <span class="at">main =</span> <span class="st">"Histogram of Age"</span>, <span class="at">xlab =</span> <span class="st">"Age"</span>, </span>
-<span id="cb19-2"><a href=""></a>         <span class="at">ylab =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="density-plots" class="slide level2">
-<h2>Density plots</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> age <span class="sc">|</span> gender, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"density"</span>, <span class="at">main =</span> <span class="st">"Age distribution"</span>, </span>
-<span id="cb20-2"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Age"</span>, <span class="at">fill =</span> <span class="st">"by"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="bar-plots" class="slide level2">
-<h2>Bar plots</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">tinyplot</span>(x, <span class="at">type =</span> <span class="st">"histogram"</span>, <span class="at">main =</span> <span class="st">"Histogram of Age"</span>, <span class="at">xlab =</span> <span class="st">"Age"</span>, </span>
+<span id="cb25-2"><a href=""></a>         <span class="at">ylab =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -545,29 +613,55 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </div>
 </div>
 </section>
+<section id="density-plots" class="slide level2">
+<h2>Density plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> age <span class="sc">|</span> gender, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"density"</span>, <span class="at">main =</span> <span class="st">"Age distribution"</span>, </span>
+<span id="cb26-2"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Age"</span>, <span class="at">fill =</span> <span class="st">"by"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-plots" class="slide level2">
+<h2>Bar plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="bar-charts-cont." class="slide level2 scrollable">
 <h2>Bar charts (cont.)</h2>
 <p>Need to clean up the data a bit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">unique</span>(dat<span class="sc">$</span>education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">unique</span>(dat<span class="sc">$</span>education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "O Level"                 "Higher National Diploma"
- [3] "Bachelor Degree"         "National Diploma"       
- [5] "A Level"                 "PhD"                    
- [7] "Lower Secondary"         "National Certificate"   
- [9] "Diploma"                 "Master Degree"          
-[11] "Primary School"         </code></pre>
+<pre><code> [1] O Level                 Higher National Diploma Bachelor Degree        
+ [4] National Diploma        A Level                 PhD                    
+ [7] Lower Secondary         National Certificate    Diploma                
+[10] Master Degree           &lt;NA&gt;                   
+10 Levels: Lower Secondary O Level A Level National Certificate ... PhD</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>dat<span class="sc">$</span>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb24-2"><a href=""></a>  <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>,</span>
-<span id="cb24-3"><a href=""></a>  <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>,</span>
-<span id="cb24-4"><a href=""></a>  <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
-<span id="cb24-5"><a href=""></a>))</span>
-<span id="cb24-6"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>dat<span class="sc">$</span>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb30-2"><a href=""></a>  <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>,</span>
+<span id="cb30-3"><a href=""></a>  <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>,</span>
+<span id="cb30-4"><a href=""></a>  <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
+<span id="cb30-5"><a href=""></a>))</span>
+<span id="cb30-6"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -580,21 +674,21 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <!-- MOBILE:    10, 28, 30, 34, 17, 4, 1 -->
 <!-- BROADBAND: 10, 28, 34, 20, 6, 2 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>the_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span>)</span>
-<span id="cb25-2"><a href=""></a>dat <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb25-4"><a href=""></a>    <span class="at">q_fbqual =</span> <span class="fu">factor</span>(q_fbqual, <span class="at">levels =</span> the_levels),</span>
-<span id="cb25-5"><a href=""></a>    <span class="at">q_mbqual =</span> <span class="fu">factor</span>(q_mbqual, <span class="at">levels =</span> the_levels)</span>
-<span id="cb25-6"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb25-7"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(q_fbqual, q_mbqual), <span class="at">names_to =</span> <span class="st">"qual_type"</span>, </span>
-<span id="cb25-8"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"quality"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">qual_type =</span> <span class="fu">recode</span>(qual_type, <span class="at">q_fbqual =</span> <span class="st">"Broadband"</span>, </span>
-<span id="cb25-10"><a href=""></a>                            <span class="at">q_mbqual =</span> <span class="st">"Mobile"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb25-11"><a href=""></a>  <span class="fu">tinyplot</span>(<span class="at">x =</span> <span class="sc">~</span> quality <span class="sc">|</span> qual_type, <span class="at">type =</span> <span class="st">"barplot"</span>, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>the_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span>)</span>
+<span id="cb31-2"><a href=""></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb31-4"><a href=""></a>    <span class="at">q_fbqual =</span> <span class="fu">factor</span>(q_fbqual, <span class="at">levels =</span> the_levels),</span>
+<span id="cb31-5"><a href=""></a>    <span class="at">q_mbqual =</span> <span class="fu">factor</span>(q_mbqual, <span class="at">levels =</span> the_levels)</span>
+<span id="cb31-6"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(q_fbqual, q_mbqual), <span class="at">names_to =</span> <span class="st">"qual_type"</span>, </span>
+<span id="cb31-8"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"quality"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb31-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">qual_type =</span> <span class="fu">recode</span>(qual_type, <span class="at">q_fbqual =</span> <span class="st">"Broadband"</span>, </span>
+<span id="cb31-10"><a href=""></a>                            <span class="at">q_mbqual =</span> <span class="st">"Mobile"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-11"><a href=""></a>  <span class="fu">tinyplot</span>(<span class="at">x =</span> <span class="sc">~</span> quality <span class="sc">|</span> qual_type, <span class="at">type =</span> <span class="st">"barplot"</span>, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -603,14 +697,14 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <section id="scatter-plots" class="slide level2">
 <h2>Scatter plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">tinyplot</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb26-2"><a href=""></a>         <span class="at">main =</span> <span class="st">"Monthly expenditure vs data usage"</span>, </span>
-<span id="cb26-3"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Data usage (GB)"</span>, <span class="at">ylab =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span>
-<span id="cb26-4"><a href=""></a><span class="fu">tinyplot_add</span>(<span class="at">type =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">tinyplot</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb32-2"><a href=""></a>         <span class="at">main =</span> <span class="st">"Monthly expenditure vs data usage"</span>, </span>
+<span id="cb32-3"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Data usage (GB)"</span>, <span class="at">ylab =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span>
+<span id="cb32-4"><a href=""></a><span class="fu">tinyplot_add</span>(<span class="at">type =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -619,7 +713,7 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">cor.test</span>(dat<span class="sc">$</span>q_fbexpend, dat<span class="sc">$</span>q_fbusage)  <span class="co"># or just cor()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">cor.test</span>(dat<span class="sc">$</span>q_fbexpend, dat<span class="sc">$</span>q_fbusage)  <span class="co"># or just cor()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -645,8 +739,8 @@ y = \beta_0 + \beta_1 x + \epsilon \\
 \]</span></p>
 <p>We can fit this model in R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat)</span>
-<span id="cb29-2"><a href=""></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat)</span>
+<span id="cb35-2"><a href=""></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -672,14 +766,14 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="nice-output-for-lm" class="slide level2">
 <h2>Nice output for <code>lm()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> age <span class="sc">+</span> q_fbqual <span class="sc">+</span> q_fbusage, <span class="at">data =</span> dat)</span>
-<span id="cb31-2"><a href=""></a>gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(</span>
-<span id="cb31-3"><a href=""></a>  fit,</span>
-<span id="cb31-4"><a href=""></a>  <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, q_fbqual <span class="sc">~</span> <span class="st">"Broadband quality"</span>,</span>
-<span id="cb31-5"><a href=""></a>               q_fbusage <span class="sc">~</span> <span class="st">"Data usage"</span>)</span>
-<span id="cb31-6"><a href=""></a>) <span class="sc">|&gt;</span></span>
-<span id="cb31-7"><a href=""></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
-<span id="cb31-8"><a href=""></a>  <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> age <span class="sc">+</span> q_fbqual <span class="sc">+</span> q_fbusage, <span class="at">data =</span> dat)</span>
+<span id="cb37-2"><a href=""></a>gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(</span>
+<span id="cb37-3"><a href=""></a>  fit,</span>
+<span id="cb37-4"><a href=""></a>  <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, q_fbqual <span class="sc">~</span> <span class="st">"Broadband quality"</span>,</span>
+<span id="cb37-5"><a href=""></a>               q_fbusage <span class="sc">~</span> <span class="st">"Data usage"</span>)</span>
+<span id="cb37-6"><a href=""></a>) <span class="sc">|&gt;</span></span>
+<span id="cb37-7"><a href=""></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href=""></a>  <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="wqmswiqkrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#wqmswiqkrz table {
@@ -1163,40 +1257,40 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Excellent</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Very Poor</td>
 <td class="gt_row gt_center" headers="estimate">—</td>
 <td class="gt_row gt_center" headers="conf.low">—</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Fair</td>
-<td class="gt_row gt_center" headers="estimate">7.3</td>
-<td class="gt_row gt_center" headers="conf.low">-2.1, 17</td>
-<td class="gt_row gt_center" headers="p.value">0.13</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Poor</td>
+<td class="gt_row gt_center" headers="estimate">-17</td>
+<td class="gt_row gt_center" headers="conf.low">-36, 3.0</td>
+<td class="gt_row gt_center" headers="p.value">0.10</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Good</td>
-<td class="gt_row gt_center" headers="estimate">3.3</td>
-<td class="gt_row gt_center" headers="conf.low">-5.6, 12</td>
-<td class="gt_row gt_center" headers="p.value">0.5</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Fair</td>
+<td class="gt_row gt_center" headers="estimate">-7.7</td>
+<td class="gt_row gt_center" headers="conf.low">-25, 10</td>
+<td class="gt_row gt_center" headers="p.value">0.4</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Poor</td>
-<td class="gt_row gt_center" headers="estimate">-1.5</td>
-<td class="gt_row gt_center" headers="conf.low">-14, 11</td>
-<td class="gt_row gt_center" headers="p.value">0.8</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Good</td>
+<td class="gt_row gt_center" headers="estimate">-12</td>
+<td class="gt_row gt_center" headers="conf.low">-29, 5.7</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Very Good</td>
-<td class="gt_row gt_center" headers="estimate">2.6</td>
-<td class="gt_row gt_center" headers="conf.low">-6.6, 12</td>
-<td class="gt_row gt_center" headers="p.value">0.6</td>
+<td class="gt_row gt_center" headers="estimate">-12</td>
+<td class="gt_row gt_center" headers="conf.low">-30, 5.2</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Very Poor</td>
-<td class="gt_row gt_center" headers="estimate">15</td>
-<td class="gt_row gt_center" headers="conf.low">-3.6, 34</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Excellent</td>
+<td class="gt_row gt_center" headers="estimate">-15</td>
+<td class="gt_row gt_center" headers="conf.low">-34, 3.6</td>
 <td class="gt_row gt_center" headers="p.value">0.11</td>
 </tr>
 <tr class="odd">
@@ -1220,11 +1314,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="tables" class="slide level2 scrollable">
 <h2>Tables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>dat <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href=""></a>  <span class="fu">select</span>(gender, age, education, q_fbexpend, q_fbusage) <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href=""></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gender) <span class="sc">|&gt;</span></span>
-<span id="cb32-4"><a href=""></a>  <span class="fu">add_overall</span>() <span class="sc">|&gt;</span></span>
-<span id="cb32-5"><a href=""></a>  <span class="fu">add_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">select</span>(gender, age, education, q_fbexpend, q_fbusage) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gender) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href=""></a>  <span class="fu">add_overall</span>() <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href=""></a>  <span class="fu">add_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="xqyegvsymt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#xqyegvsymt table {
@@ -1833,13 +1927,13 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
-<span id="cb33-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
-<span id="cb33-4"><a href=""></a>    <span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), </span>
-<span id="cb33-5"><a href=""></a>    <span class="at">.by =</span> mukim</span>
-<span id="cb33-6"><a href=""></a>  )</span>
-<span id="cb33-7"><a href=""></a><span class="fu">print</span>(spend_mkm_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
+<span id="cb39-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb39-4"><a href=""></a>    <span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), </span>
+<span id="cb39-5"><a href=""></a>    <span class="at">.by =</span> mukim</span>
+<span id="cb39-6"><a href=""></a>  )</span>
+<span id="cb39-7"><a href=""></a><span class="fu">print</span>(spend_mkm_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 × 2
    mukim                spend
@@ -1859,8 +1953,8 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="co"># From {bruneimap} package</span></span>
-<span id="cb35-2"><a href=""></a><span class="fu">glimpse</span>(mkm_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="co"># From {bruneimap} package</span></span>
+<span id="cb41-2"><a href=""></a><span class="fu">glimpse</span>(mkm_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 39
 Columns: 8
@@ -1879,15 +1973,15 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882�
 <section id="spatial-patterns-cont." class="slide level2">
 <h2>Spatial patterns (cont.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">left_join</span>(mkm_sf, spend_mkm_df) <span class="sc">|&gt;</span> <span class="co"># combines the two data frames</span></span>
-<span id="cb37-2"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb37-3"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) <span class="sc">+</span></span>
-<span id="cb37-4"><a href=""></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb37-5"><a href=""></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">left_join</span>(mkm_sf, spend_mkm_df) <span class="sc">|&gt;</span> <span class="co"># combines the two data frames</span></span>
+<span id="cb43-2"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-3"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href=""></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href=""></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1899,7 +1993,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882�
 <p>(Comment section) Describe briefly the top reason that limits your internet access.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I'll almost never download software that costs hundreds of dollars upfront – it's just not worth breaking the bank every five minutes to keep basic services running fine."
 [2] "I'd rather not get internet just to pay an extra $50 for installation that'll likely wear off within a year anyway."                                                       
@@ -1916,7 +2010,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882�
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1928,7 +2022,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882�
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>

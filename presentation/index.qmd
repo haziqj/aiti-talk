@@ -203,7 +203,66 @@ dat <- read_csv("../R/fake_survey.csv")
 glimpse(dat)
 ```
 
+::: {.callout-tip}
+### Demographic vs study questions
+Usually, a survey contains two types of question: 1) Demographic, and 2) study questions.
+:::
+
 ## Data types
+
+```{mermaid}
+%%| echo: false
+%%| fig-align: center
+graph TD
+    A[**Data Type**]
+    
+    A --> B["**Logical**<br><br>e.g. TRUE, FALSE"]
+    A --> C[**Numeric**]
+    A --> D["**Complex**<br><br>e.g. 1+2i, 3+4i"]
+    A --> E["**Character**<br><br>e.g. 'cat', 'blue'"]
+    
+    C --> CA["**Integer**<br><br>e.g. 1L, 314L"]
+    C --> CB["**Double**<br><br>e.g. 1.23, 3.141"]
+    
+    E --> EA["**Factor**<br><br>e.g. 'MOE', 'MTIC', 'MOH'"]
+    E --> EB["**Ordered**<br><br>e.g. 'Disagree', 'Neutral',<br>'Agree'"]
+    
+    %% Assign nodes to classes
+    class EA pink
+    class EB pink
+
+    %% Define styles for the classes
+    classDef pink fill:#f9c,color:#fff,stroke:#333,stroke-width:1px
+```
+
+::: {.callout-tip}
+### Know your data types
+We must know the data types of our variables to perform the correct operations on them. For example, if we want to calculate the mean of a variable, it must be numeric. If it is a factor/ordered, we need to convert it to numeric first.
+:::
+
+## Transforming data {.scrollable}
+
+```{r}
+#| output-location: slide
+dat <-
+  dat |>
+  mutate(
+    # Convert education to factors
+    education = factor(education, levels = c(
+      "Lower Secondary", "O Level", "A Level", "National Certificate", "Diploma",
+      "National Diploma", "Higher National Diploma", "Bachelor Degree",
+      "Master Degree", "PhD"
+    )),
+    # Convert Likert scale to ordered factors
+    across(c(q_mbqual, q_fbqual), function(x) ordered(x, levels = c(
+      "Very Poor", "Poor", "Fair", "Good", "Very Good", "Excellent"
+    )))
+  )
+
+glimpse(dat)
+head(as.numeric(dat$q_mbqual), 15)
+head(as.numeric(dat$kampong), 15)
+```
 
 
 
@@ -252,18 +311,9 @@ Statistics is all about variability.
 - Clean?
 - Objectives
 
-## Importing data
 
 
 
-
-## Data types
-
-- Numeric (continuous vs integer)
-- Logical
-- Character
-- Factors
-- Ordered
 
 ## Summary statistics
 
