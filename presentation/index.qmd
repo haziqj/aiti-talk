@@ -74,6 +74,140 @@ Datasaurus approves!
 Source: [R for Data Science (2e)](https://r4ds.hadley.nz/)
 :::
 
+## Why choose R?
+
+R is an interpreted programming language for statistical computing and data visualisation. It has been adopted in many fields, especially statistics and data science.
+
+![](figures/featuresR.webp){fig-align="center"}
+
+
+::: aside
+Source: [Data Flair](https://data-flair.training/blogs/using-r-for-data-science/)
+:::
+
+## R and RStudio
+
+- You can run R in the terminal, the R GUI, or other apps like RStudio.
+- RStudio is an IDE (integrated development environment) for R. 
+- Alternatives include VSCode, Emacs, and `<insert favourite IDE>`.
+
+. . . 
+
+```{r}
+my_string <- "Hello, World!"
+print(my_string)
+
+# Create a vector, manipulate it
+x <- c(1, 2, 3, 4, 5)
+sum(x) / length(x)
+for (i in x) print(i)
+```
+
+
+
+
+## Lay of the land
+
+### Project folder
+
+
+
+::: {.columns}
+::: {.column width=50%}
+1. Download material from <https://github.com/haziqj/aiti-talk>
+2. Choose a location to save the project
+3. Go to the R/ folder, and open the `aiti.RProj` file
+4. This will open a new **RStudio project**
+
+::: {.callout-tip}
+### Project folder
+
+R needs to know where is your project's "home" directory.
+By clicking on the RProj file, RStudio will set the working directory to the project folder.
+
+
+:::
+
+
+:::
+::: {.column width=50%}
+
+::: {.nudge-up}
+::: {.nudge-up-large}
+```{r}
+#| out-width: 50%
+#| fig-align: center
+#| echo: false
+knitr::include_graphics("figures/download.png")
+```
+:::
+:::
+::: {.nudge-up-large}
+::: {.nudge-up-xl}
+```{r}
+#| out-width: 90%
+#| fig-align: center
+#| echo: false
+knitr::include_graphics("figures/folder.png")
+```
+:::
+:::
+:::
+:::
+
+## Lay of the land
+
+### RStudio
+
+![](figures/panes.png){fig-align="center" width=65%}
+
+## Preamble
+
+```{r}
+#| label: setup
+library(tidyverse)  # data wrangling tools
+library(tinyplot)   # for quick plotting
+library(tidytext)   # bigrams
+library(tm)         # text mining
+library(wordcloud)  # word clouds
+library(gtsummary)  # pretty summary tables
+library(bruneimap)  # for mapping
+
+theme_set(theme_bw())  # ggplot2
+tinytheme("clean2")    # tinyplot
+```
+
+::: {.callout-tip}
+### Installing packages
+
+In RStudio, if a package is not installed, a yellow ribbon will appear prompting you to install it.
+You can also manually install packages by running:
+```r
+install.packages("<package name>")  # only need to install once
+library("<package name>")           # but load the package every time!
+```
+Or browse the 'Packages' pane in RStudio.
+:::
+
+## Importing data
+
+```{r}
+#| eval: false
+dat <- read_csv("fake_survey.csv")
+glimpse(dat)
+```
+
+```{r}
+#| echo: false
+dat <- read_csv("../R/fake_survey.csv")
+glimpse(dat)
+```
+
+## Data types
+
+
+
+
 ## Tidy data
 
 ![](figures/tidydata.png){fig-align="center"}
@@ -94,22 +228,13 @@ Source: `fake_survey.csv`
 Source: [Allison Horst stats illustrations](https://github.com/allisonhorst/stats-illustrations)
 :::
 
-## Preamble
+## Mindset shift
 
-```{r}
-#| label: setup
-library(tidyverse)  # data wrangling tools
-library(tinyplot)
-library(tidytext)   # bigrams
-library(tm)         # text mining
-library(wordcloud)  # word clouds
-library(gtsummary)
-library(bruneimap)
-tinytheme("clean2")
+Code everything!!! Reproducibility matters
 
-dat <- read_csv("../R/fake_survey.csv")
-glimpse(dat)
-```
+
+# Start
+
 
 
 
@@ -119,33 +244,7 @@ Statistics is all about variability.
 
 - Graph
 
-## What is R?
 
-What can we do using R?
-Mainly used for statistical analysis.
-Focus on data wrangling and data analysis.
-Visualisations.
-Create reproducible reports.
-
-## General purpose programming language
-
-Show for loops?
-
-
-## There's a package for that
-
-
-`{ellmer}`
-`{rvest}`
-`{bruneimap}`
-
-
-## Getting started
-
-- RStudio vs R [IDE vs language]
-- Quick lay of the land
-- RProj and "home" directory
-- Mindset shift: Code everything!!! Reproducibility matters
 
 ## Statistical thinking
 
