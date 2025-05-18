@@ -279,17 +279,18 @@ Source: `fake_survey.csv`
 
 > All happy families are alike; each unhappy family is unhappy in its own way. ---Leo Tolstoy
 
-::: {.nudge-up-medium}
-![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/tidydata_2.jpg){fig-align="center" width=80%}
+::: {.nudge-up}
+![](figures/tidydata_2.jpg){fig-align="center" width=83%}
 :::
 
 ::: aside
 Source: [Allison Horst stats illustrations](https://github.com/allisonhorst/stats-illustrations)
 :::
 
-## Mindset shift
+## Mindset shift & expectations
 
 Code everything!!! Reproducibility matters
+
 
 
 # Start
