@@ -6,13 +6,21 @@ project:
     - "!presentation/"
 
 website:
-  title: "R for Data Science"
+  title: "AITI Talk"
+  repo-url: https://github.com/haziqj/aiti-talk
+  issue-url: https://github.com/haziqj/aiti-talk/issues
+  repo-actions: [edit, issue]
 
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: https://github.com/haziqj/aiti-talk
+        text: Material
+      - href: https://haziqj.ml/aiti-talk/presentation
+        text: Slides
+      - href: R/report.qmd
+        text: Report
 
 format:
   html:
@@ -22,5 +30,7 @@ format:
     css: styles.css
     toc: true
 
+
+lightbox: true
 
 

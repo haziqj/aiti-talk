@@ -1,5 +1,5 @@
 ---
-title: "AITI Talk"
+title: "R for Data Science"
 ---
 
 Goal is to give an introductory talk about R software and ecosystem, and how it can be useful to produce data products such as reports with tables and visualisations.
