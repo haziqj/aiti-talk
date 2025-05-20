@@ -4,13 +4,6 @@ permissions: read-all
 
 on:
   push:
-    paths:
-      - 'R/**'
-      - '.github/workflows/run-analysis.yml'
-  pull_request:
-    paths:
-      - 'R/**'
-      - '.github/workflows/run-analysis.yml'
 
 jobs:
   run-analysis:
