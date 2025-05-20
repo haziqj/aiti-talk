@@ -29,7 +29,7 @@ date: 2025-05-21
 execute:
   echo: true
   freeze: auto
-  cache: true
+  cache: false
 ---
 
 ## Introduction
@@ -452,103 +452,272 @@ barplot(table(x), las = 2, cex.names = 0.8, main = "Barplot of Education",
 Source: ChatGPT (gpt-4o)
 :::
 
-<!-- - Continuous vs continuous -->
-<!-- - Continuous vs nominal -->
-<!-- - Nominal vs nominal -->
 
-<!-- ```{r} -->
-
-<!-- ``` -->
-
-
-
-
-## Side-by-side bar charts {.scrollable}
-
-<!-- 3. Quality of broadband internet access [bar chart side by side] -->
-
-<!-- Excellent; V Good; Good; Fair; Poor; V Poor -->
-
-<!-- MOBILE:    10, 28, 30, 34, 17, 4, 1 -->
-<!-- BROADBAND: 10, 28, 34, 20, 6, 2 -->
-
-```{r}
-#| out-width: 100%
-#| fig-height: 5.2
-the_levels <- c("Poor", "Fair", "Good", "Very Good", "Excellent")
-dat |>
-  mutate(
-    q_fbqual = factor(q_fbqual, levels = the_levels),
-    q_mbqual = factor(q_mbqual, levels = the_levels)
-  ) |>
-  pivot_longer(c(q_fbqual, q_mbqual), names_to = "qual_type", 
-               values_to = "quality") |>
-  mutate(qual_type = recode(qual_type, q_fbqual = "Broadband", 
-                            q_mbqual = "Mobile")) |>
-  tinyplot(x = ~ quality | qual_type, type = "barplot", beside = TRUE)
-```
 
 ## Scatter plots
 
 ```{r}
 #| out-width: 100%
-
-tinyplot(q_fbexpend ~ q_fbusage, data = dat, cex = 0.8,
-         main = "Monthly expenditure vs data usage", 
-         xlab = "Data usage (GB)", ylab = "Monthly expenditure (BND)")
-tinyplot_add(type = "lm", col = "red3")
+#| fig-height: 5
+plot(q_fbexpend ~ q_fbusage, data = dat,
+     main = "Monthly expenditure vs data usage", 
+     xlab = "Data usage (GB)", ylab = "Monthly expenditure (BND)")
 ```
 
-## Correlation 
+## Strength of linear relationships
+
+
+::: {.columns}
+::: {.column width=50%}
 
 ```{r}
-cor.test(dat$q_fbexpend, dat$q_fbusage)  # or just cor()
+cor(dat$q_fbexpend, dat$q_fbusage) 
 ```
 
-## (Simple) Linear regression model {.scrollable}
+:::
+::: {.column width=50%}
+$$
+\rho = \frac{\text{Cov(X,Y)}}{\text{SD(X)}\times\text{SD(Y)}} \in [-1,1]
+$$
+:::
+:::
 
-A simple linear regression model assumes
+
+```{r corrplots}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 4.6
+set.seed(221222)
+n <- 50
+dat1 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 1, 1, 1), ncol = 2))
+dat2 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.8, 0.8, 1), ncol = 2))
+dat3 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.5, 0.5, 1), ncol = 2))
+dat4 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.2, 0.2, 1), ncol = 2))
+dat5 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0, 0, 1), ncol = 2))
+dat6 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -0.2, -0.2, 1), ncol = 2))
+dat7 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -0.8, -0.8, 1), ncol = 2))
+dat8 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -1, -1, 1), ncol = 2))
+plot.df <- rbind(
+  data.frame(dat1, rho = 1),
+  data.frame(dat2, rho = 2),
+  data.frame(dat3, rho = 3),
+  data.frame(dat4, rho = 4),
+  data.frame(dat5, rho = 5),
+  data.frame(dat6, rho = 6),
+  data.frame(dat7, rho = 7),
+  data.frame(dat8, rho = 8)
+)
+plot.df$rho <- factor(plot.df$rho)
+levels(plot.df$rho)[1] <- expression(rho * " = 1")
+levels(plot.df$rho)[2] <- expression(rho * " = 0.8")
+levels(plot.df$rho)[3] <- expression(rho * " = 0.5")
+levels(plot.df$rho)[4] <- expression(rho * " = 0.2")
+levels(plot.df$rho)[5] <- expression(rho * " = 0")
+levels(plot.df$rho)[6] <- expression(rho * " = -0.2")
+levels(plot.df$rho)[7] <- expression(rho * " = -0.8")
+levels(plot.df$rho)[8] <- expression(rho * " = -1")
+
+ggplot(plot.df, aes(x = X1, y = X2, group = rho)) +
+  geom_point(size = 1.1) +
+  facet_wrap(. ~ rho, nrow = 2, scales = "free", labeller = label_parsed) +
+  labs(x = "X", y = "Y") +
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank()) 
+```
+
+
+
+## (Simple) Linear regression model
+
+::: {.columns}
+::: {.column width=50%}
+
+::: {.nudge-down}
+```{r}
+#| eval: false
+fit <- lm(q_fbexpend ~ q_fbusage, data = dat)
+summary(fit)
+```
+:::
+
+:::
+::: {.column width=50%}
 $$
 \begin{gathered}
 y = \beta_0 + \beta_1 x + \epsilon \\
 \epsilon \sim N(0, \sigma^2)
 \end{gathered}
 $$
-
-We can fit this model in R:
+:::
+:::
 
 ```{r}
+#| echo: false
 fit <- lm(q_fbexpend ~ q_fbusage, data = dat)
 summary(fit)
 ```
 
 
-## Nice output for `lm()`
+## Scatter plots (with linear trend line)
 
 ```{r}
-fit <- lm(q_fbexpend ~ age + q_fbqual + q_fbusage, data = dat)
-gtsummary::tbl_regression(
-  fit,
-  label = list(age ~ "Age", q_fbqual ~ "Broadband quality",
-               q_fbusage ~ "Data usage")
-) |>
-  bold_labels() |>
-  bold_p()
-  
+#| eval: false
+# continuing previous plot
+abline(fit, col = "red3", lwd = 2)
 ```
 
-## Tables {.scrollable}
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 5.2
+plot(q_fbexpend ~ q_fbusage, data = dat,
+     main = "Monthly expenditure vs data usage", 
+     xlab = "Data usage (GB)", ylab = "Monthly expenditure (BND)")
+abline(fit, col = "red3", lwd = 2)
+```
+
+
+<!-- ## Nice output for `lm()` -->
+
+<!-- ```{r} -->
+<!-- fit <- lm(q_fbexpend ~ age + q_fbqual + q_fbusage, data = dat) -->
+<!-- gtsummary::tbl_regression( -->
+<!--   fit, -->
+<!--   label = list(age ~ "Age", q_fbqual ~ "Broadband quality", -->
+<!--                q_fbusage ~ "Data usage") -->
+<!-- ) |> -->
+<!--   bold_labels() |> -->
+<!--   bold_p() -->
+
+<!-- ``` -->
+
+
+## Five-number summary by group
 
 ```{r}
+#| out-width: 100%
+#| fig-height: 3
+by(dat$q_fbexpend, dat$gender, summary)
+boxplot(q_fbexpend ~ gender, dat, range = 5, col = "lightblue", horizontal = TRUE,
+        ylab = NULL, xlab = NULL, main = "Monthly expenditure (BND)")
+```
+
+## Contingency tables
+
+```{r}
+tab1 <- table(dat$gender, dat$q_fbqual)
+print(tab1)
+tab2 <- prop.table(tab1, margin = 1)  # row proportions
+round(tab2, 2)
+chisq.test(tab1)
+```
+
+## Side-by-side bar charts 
+
+```{r}
+#| out-width: 100%
+#| fig-height: 5.4
+#| echo: false
+
 dat |>
-  select(gender, age, education, q_fbexpend, q_fbusage) |>
-  tbl_summary(by = gender) |>
-  add_overall() |>
-  add_p()
+  pivot_longer(c(q_fbqual, q_mbqual), names_to = "qual_type", 
+               values_to = "quality") |>
+  mutate(qual_type = recode(qual_type, q_fbqual = "Broadband", 
+                            q_mbqual = "Mobile")) |>
+  ggplot(aes(x = quality, fill = qual_type)) +
+  geom_bar(position = "dodge") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(x = NULL, y = "Frequency", fill = NULL, title = "Comparison between fixed vs mobile broadband quality satisfaction") +
+  theme_bw()
 ```
+
+## Mosaic plots
+
+```{r}
+#| out-width: 100%
+#| fig-height: 5.6
+#| echo: false
+# First install using devtools::install_github("haleyjeppson/ggmosaic")
+library(ggmosaic)
+dat |>
+  mutate(
+    q_fbqual = forcats::fct_recode(q_fbqual, 
+      "l\nPoor" = "Poor", 
+      "Very Poor        " = "Very Poor"
+  )) |>
+  ggplot() +
+  geom_mosaic(aes(x = q_fbqual, fill = q_mbqual), show.legend = FALSE) +
+  theme_mosaic() +
+  labs(x = "Fixed broadband quality", y = "Mobile broadband quality") 
+```
+
+## Mosaic plots (Titanic data set)
+
+```{r}
+#| out-width: 100%
+#| fig-height: 5.8
+#| echo: false
+# First install using devtools::install_github("haleyjeppson/ggmosaic")
+library(titanic)
+titanic |>
+  # mutate(
+  #   q_fbqual = forcats::fct_recode(q_fbqual, 
+  #     "l\nPoor" = "Poor", 
+  #     "Very Poor        " = "Very Poor"
+  # )) |>
+  ggplot() +
+  geom_mosaic(aes(x = product(Sex, Class, Survived), fill = Class, alpha = Sex)) +
+  scale_alpha_manual(values = c(0.5, 1.0)) + 
+  scale_fill_viridis_d() +
+  theme_mosaic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(, y = "Passenger class") 
+```
+
+<!-- ## Tables {.scrollable} -->
+
+<!-- ```{r} -->
+<!-- dat |> -->
+<!--   select(gender, age, education, q_fbexpend, q_fbusage) |> -->
+<!--   tbl_summary(by = gender) |> -->
+<!--   add_overall() |> -->
+<!--   add_p() -->
+<!-- ``` -->
+
+# Advanced stuff
+
+## More co-variability
+
+## Grammar of graphics
+
+## Sankey plots
+
+```{r}
+#| out-width: 100%
+#| echo: false
+#| warning: false
+library(ggsankey)
+dat |>
+  mutate(
+    Gender = gender,
+    Education = education,
+    Expenditure = cut(q_fbexpend, c(0, 50, 100, Inf), 
+                     labels = c("< BND50", "BND50-BND100", "> BND100")),
+    Usage = cut(q_fbusage, c(0, 1, 5, 10, 50, 100, Inf), 
+                    labels = c("< 1GB", "1-5GB", "5-10GB", "10-50GB", "50-100GB", ">100GB"))
+  ) |>
+  make_long(Gender, Usage, Expenditure) |>
+  ggplot(aes(x, next_x = next_x, node = node, next_node = next_node, 
+             label = node, fill = factor(node))) +
+  geom_sankey(flow.alpha = .6) +
+  geom_sankey_label(fill = "white") +
+  theme_sankey() +
+  theme(legend.position = "none") +
+  labs(x = NULL)
+```
+
 
 ## Spatial patterns
-
 
 ::: {.columns}
 

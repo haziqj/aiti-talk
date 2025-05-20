@@ -230,5 +230,6 @@ dat <-
   arrange(dat, id) |>
   select(-population, -q_limiting) |>
   rename(q_limiting = q_limiting2) |>
-  select(id, kampong, mukim, district, everything())
+  select(id, kampong, mukim, district, everything()) |>
+  mutate(q_fbexpend = scales::rescale(q_fbexpend, c(3, 782)))
 write_csv(dat, file = "fake_survey.csv")
