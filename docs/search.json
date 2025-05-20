@@ -33,5 +33,12 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "instructions/index.html",
+    "href": "instructions/index.html",
+    "title": "🛠 Machine Setup",
+    "section": "",
+    "text": "Welcome! Prior to attending the seminar talk, please ensure you have done the following.\n\n1. Install R and RStudio\n\nDownload both software at https://posit.co/download/rstudio-desktop/.\nOnce the download completes, double-click on the .exe file to run the installer. Simply follow the steps of the installer to finish.\n\n\nNote: These are two different softwares, so please ensure you have installed both of them. For more detailed guideline, visit link.\n\n\n\n2. Download Workshop material\n\nVisit https://github.com/haziqj/aiti-talk on your search engine.\nPress on the green code icon on top right.\nOption 1: Open with Github Desktop and clone the repo onto a convenient location on your computer.  Option 2: Download the zip file and unzip onto a convenient location on your computer.\nClick on aiti-talk.Rproj to open the project in RStudio.\n\n\n\n\n\n3. ⁠Install all packages\n\nLaunch Rstudio app directly. It will look something like:\n\n\n\n\nSource: Link\n\n\nNote: Previously, we installed both R (language) and Rstudio (IDE). However, all coding can be done in just Rstudio.\n\n\nInstall the following R packages by running the following code in the console pane:\n\n\ninstall.packages(c(\n  \"tidyverse\", \n  \"tinyplot\",\n  \"sf\",\n  \"bruneimap\",\n  \"tidytext\",\n  \"tm\",\n  \"wordcloud\",\n  \"gtsummary\",\n  \"devtools\",\n  \"scales\",\n  \"mvtnorm\",\n  \"titanic\",\n  \"ggthemes\",\n  \"viridis\",\n  \"ggrepel\",\n  \"RColorBrewer\"\n))\n\ndevtools::install_github(\"haleyjeppson/ggmosaic\")\n\n\n\n\n4. Ready to start! 🥳\nQuick Tips\n\nTo work on long chunks of codes, it is recommended to use the source pane by creating a R Script.\nTo create a R Script: File &gt; New File &gt; R Script\nTo run code: press Ctrl + Enter (Windows) or Cmd + Enter (Mac). Alternatively, press run icon (top right) of the source pane.\nTo load libraries for additional functions, run the codes in source pane:\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\nTry it out!\n\nprint(\"Hello, World!\")\n\n[1] \"Hello, World!\"\n\n\n\nplot(pressure)\n\n\n\n\n\n\n\n\nFrom simple printing to complex visualisation, possibilities are now limitless, Happy coding!"
   }
 ]

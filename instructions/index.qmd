@@ -52,8 +52,23 @@ b. Install the following R packages by running the following code in the `consol
 install.packages(c(
   "tidyverse", 
   "tinyplot",
-  "bruneimap"
+  "sf",
+  "bruneimap",
+  "tidytext",
+  "tm",
+  "wordcloud",
+  "gtsummary",
+  "devtools",
+  "scales",
+  "mvtnorm",
+  "titanic",
+  "ggthemes",
+  "viridis",
+  "ggrepel",
+  "RColorBrewer"
 ))
+
+devtools::install_github("haleyjeppson/ggmosaic")
 ```
 
 <br>
