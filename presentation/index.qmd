@@ -726,7 +726,8 @@ dat |>
   geom_point(alpha = 0.6) +
   geom_smooth(method = "lm", se = FALSE, fullrange = TRUE, linewidth = 0.8) +
   facet_grid(education ~ age) +
-  labs(x = "Data usage (GB)", y = "Monthly expenditure (BND)", col = "Gender")
+  labs(x = "Data usage (GB)", y = "Monthly expenditure (BND)", col = "Gender") +
+  theme_bw()
 ```
 
 :::

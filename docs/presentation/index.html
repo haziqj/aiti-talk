@@ -420,7 +420,7 @@ $ education  &lt;chr&gt; "O Level", "O Level", "O Level", "Higher National Diplo
 $ q_fbspeed  &lt;dbl&gt; 54, 58, 711, 56, 187, 58, 55, 88, 888, 146, 20, 37, 53, 192…
 $ q_fbqual   &lt;chr&gt; "Fair", "Very Good", "Poor", "Very Good", "Good", "Fair", "…
 $ q_mbqual   &lt;chr&gt; "Poor", "Good", "Good", "Good", "Good", "Good", "Good", "Fa…
-$ q_fbexpend &lt;dbl&gt; 782, 53, 744, 53, 635, 617, 34, 601, 590, 34, 588, 8, 574, …
+$ q_fbexpend &lt;dbl&gt; 782.00000, 78.29368, 745.31846, 78.29368, 640.10037, 622.72…
 $ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 190,…
 $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
 </div>
@@ -525,7 +525,7 @@ $ education  &lt;fct&gt; O Level, O Level, O Level, Higher National Diploma, Bac
 $ q_fbspeed  &lt;dbl&gt; 54, 58, 711, 56, 187, 58, 55, 88, 888, 146, 20, 37, 53, 192…
 $ q_fbqual   &lt;ord&gt; Fair, Very Good, Poor, Very Good, Good, Fair, Very Good, Ve…
 $ q_mbqual   &lt;ord&gt; Poor, Good, Good, Good, Good, Good, Good, Fair, Very Poor, …
-$ q_fbexpend &lt;dbl&gt; 782, 53, 744, 53, 635, 617, 34, 601, 590, 34, 588, 8, 574, …
+$ q_fbexpend &lt;dbl&gt; 782.00000, 78.29368, 745.31846, 78.29368, 640.10037, 622.72…
 $ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 190,…
 $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
 </div>
@@ -685,7 +685,8 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>x <span class="ot">&lt;-</span> dat<span class="sc">$</span>gender</span>
 <span id="cb28-2"><a href=""></a><span class="fu">head</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Female" "Male"   "Female" "Male"   "Male"   "Female"</code></pre>
+<pre><code>[1] Female Male   Female Male   Male   Female
+Levels: Male Female</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># No such thing as the 'mean' of character vectors!</span></span>
 <span id="cb30-2"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -696,14 +697,14 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <span id="cb32-2"><a href=""></a><span class="fu">table</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x
-Female   Male 
-  1010    990 </code></pre>
+  Male Female 
+   990   1010 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">prop.table</span>(<span class="fu">table</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x
-Female   Male 
- 0.505  0.495 </code></pre>
+  Male Female 
+ 0.495  0.505 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># If you're fancy:</span></span>
 <span id="cb36-2"><a href=""></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -826,16 +827,16 @@ lm(formula = q_fbexpend ~ q_fbusage, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--155.44  -26.48   -7.16   16.48  614.35 
+-150.05  -25.56   -6.91   15.91  593.04 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 29.492697   2.302982   12.81   &lt;2e-16 ***
-q_fbusage    0.222830   0.007108   31.35   &lt;2e-16 ***
+(Intercept) 55.601997   2.223077   25.01   &lt;2e-16 ***
+q_fbusage    0.215099   0.006861   31.35   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 56.01 on 1998 degrees of freedom
+Residual standard error: 54.07 on 1998 degrees of freedom
 Multiple R-squared:  0.3297,    Adjusted R-squared:  0.3294 
 F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
@@ -875,11 +876,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>dat$gender: Male
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -15.00   54.00   77.00   90.94  109.75  635.00 
+  12.65   79.26  101.46  114.92  133.07  640.10 
 ------------------------------------------------------------ 
 dat$gender: Female
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -25.00   51.00   75.00   89.23  107.00  782.00 </code></pre>
+   3.00   76.36   99.53  113.27  130.42  782.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">boxplot</span>(q_fbexpend <span class="sc">~</span> gender, dat, <span class="at">range =</span> <span class="dv">5</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">horizontal =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb47-2"><a href=""></a>        <span class="at">ylab =</span> <span class="cn">NULL</span>, <span class="at">xlab =</span> <span class="cn">NULL</span>, <span class="at">main =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1173,14 +1174,14 @@ X-squared = 7.575, df = 5, p-value = 0.1813</code></pre>
 <pre><code># A tibble: 8 × 2
   mukim                spend
   &lt;chr&gt;                &lt;dbl&gt;
-1 Mukim Seria           91.9
-2 Mukim Berakas A       91.5
-3 Mukim Pangkalan Batu  97.3
-4 Mukim Berakas B       88.7
-5 Mukim Kota Batu      114  
-6 Mukim Tanjong Maya    81.9
-7 Mukim Pekan Tutong   107. 
-8 Mukim Gadong A        96.4</code></pre>
+1 Mukim Seria           116.
+2 Mukim Berakas A       115.
+3 Mukim Pangkalan Batu  121.
+4 Mukim Berakas B       113.
+5 Mukim Kota Batu       137.
+6 Mukim Tanjong Maya    106.
+7 Mukim Pekan Tutong    131.
+8 Mukim Gadong A        120.</code></pre>
 </div>
 </div>
 </div>
