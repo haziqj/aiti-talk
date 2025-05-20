@@ -47,5 +47,5 @@ jobs:
             github::haleyjeppson/ggmosaic
 
       - name: Run analysis script
-        run: |
-          Rscript R/analysis.R
+        working-directory: R
+        run: Rscript analysis.R
