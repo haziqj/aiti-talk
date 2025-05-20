@@ -21,9 +21,10 @@ format:
 author:
   - name: Haziq Jamil, PhD
     orcid: 0000-0003-3298-1010
-    email: haziq.jamil@ubd.edu.bn
+    # email: haziq.jamil@ubd.edu.bn | `https://haziqj.ml/aiti-talk`
     affiliations: 
-      - Assistant Professor in Statistics | UBD
+      - 'Assistant Professor in Statistics, Universiti Brunei Darussalam<br>Visiting Fellow, London School of Economics and Political Science'
+      - '<span style="font-style:normal;">[`https://haziqj.ml/aiti-talk/`](https://haziqj.ml/aiti-talk/)</span>'
 date: 2025-05-21
 # bibliography: refs.bib
 execute:
@@ -32,9 +33,15 @@ execute:
   cache: true
 ---
 
-## Introduction
+## Who we are
 
-Who's who
+::: {.nudge-down}
+![](figures/aiti_whoswho.png){fig-align="left" width=65%}
+:::
+
+[[Instructions and material available at]{.ubdrubydeepbg} `https://haziqj.ml/ aiti-talk/`]{.absolute top=240 right=90 width="300" height="300"}
+
+# Let's start {.transition-slide-ubdrubydeep}
 
 ## Introduction
 
@@ -42,7 +49,7 @@ Who's who
 
 ::: {.column width=33%}
 ![](figures/datasaurus.png)
-Datasaurus approves!
+Datasaurus supports you!
 
 :::
 
@@ -290,11 +297,16 @@ Source: [Allison Horst stats illustrations](https://github.com/allisonhorst/stat
 
 ## Mindset shift & expectations
 
-Code everything!!! Reproducibility matters
+- Emphasis on writing _reproducible_ R code
+
+- Appreciate that there's a leaRning curve
+
+- Goal of the talk is to show what R is capable of
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/r_rollercoaster.png){fig-align="center" width=70%}
 
 
-
-# Start
+# Basics {.transition-slide-ubdrubydeep}
 
 ## Variability
 
@@ -414,7 +426,7 @@ chisq.test(table(x))
 
 ```{r}
 #| out-width: 100%
-#| fig-height: 5.2
+#| fig-height: 5
 x <- dat$education
 barplot(table(x), las = 2, cex.names = 0.8, main = "Barplot of Education", 
         ylab = "Frequency", col = "lightblue")
@@ -682,7 +694,7 @@ titanic |>
 <!--   add_p() -->
 <!-- ``` -->
 
-# Advanced stuff
+# Advanced {.transition-slide-ubdrubydeep}
 
 ## More co-variability
 
@@ -1119,4 +1131,29 @@ wordcloud(
 :::
 
 :::
+
+## Reproducible reports
+
+::: {.nudge-down}
+![](https://quarto.org/docs/get-started/hello/images/rstudio-qmd-how-it-works.png){fig-align="center" width=80%}
+:::
+
+Quarto is an open-source scientific and technical publishing system.
+It enables you to create dynamic documents, reports, presentations, and websites using R code and Markdown language.
+
+> **DEMO** See report.qmd file
+
+# Ending
+
+## Where to go from here?
+
+- Learning more R and statistics
+  - [Faculty modules](), [UBD C3L](https://c3l.ubd.edu.bn/courses-and-programmes/14-week-courses-and-bachelor-of-science-in-digital-economy-bsc/), [UBD ILIA](https://ilia.ubd.edu.bn/programmes/data-analysis-for-leaders-and-managers/)
+  - [Brunei R User Group](http://bruneir.github.io)
+- Hiring policy update?
+- Workflow update?
+
+![](https://r4ds.hadley.nz/diagrams/data-science/base.png){fig-align="center" width=90%}
+
+
 
