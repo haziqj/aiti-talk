@@ -29,7 +29,7 @@ date: 2025-05-21
 execute:
   echo: true
   freeze: auto
-  cache: false
+  cache: true
 ---
 
 ## Introduction
@@ -249,11 +249,12 @@ We must know the data types of our variables to perform the correct operations o
 dat <-
   dat |>
   mutate(
+    gender = factor(gender, levels = c("Male", "Female")),
     # Convert education to factors
     education = factor(education, levels = c(
-      "Lower Secondary", "O Level", "A Level", "National Certificate", "Diploma",
-      "National Diploma", "Higher National Diploma", "Bachelor Degree",
-      "Master Degree", "PhD"
+      "Primary School", "Lower Secondary", "O Level", "A Level", 
+      "National Certificate", "Diploma", "National Diploma", 
+      "Higher National Diploma", "Bachelor Degree", "Master Degree", "PhD"
     )),
     # Convert Likert scale to ordered factors
     across(c(q_mbqual, q_fbqual), function(x) ordered(x, levels = c(
@@ -266,9 +267,6 @@ head(as.numeric(dat$q_mbqual), 15)
 head(as.numeric(dat$kampong), 15)
 ```
 :::
-
-
-
 
 ## Tidy data
 
@@ -688,88 +686,368 @@ titanic |>
 
 ## More co-variability
 
-## Grammar of graphics
+::: {.nudge-up}
+![](figures/mydata_facets.png){fig-align="center" width=88%}
+:::
 
-## Sankey plots
+
+
+::: {.nudge-up-xl}
+
 
 ```{r}
 #| out-width: 100%
+#| fig-height: 3.5
 #| echo: false
-#| warning: false
-library(ggsankey)
 dat |>
   mutate(
-    Gender = gender,
-    Education = education,
-    Expenditure = cut(q_fbexpend, c(0, 50, 100, Inf), 
-                     labels = c("< BND50", "BND50-BND100", "> BND100")),
-    Usage = cut(q_fbusage, c(0, 1, 5, 10, 50, 100, Inf), 
-                    labels = c("< 1GB", "1-5GB", "5-10GB", "10-50GB", "50-100GB", ">100GB"))
+    age = cut(age, breaks = c(0, 18, 40, 60, Inf),
+              labels = paste0("Age: ", c("< 18", "18-40", "40-60", "60+"))),
+    education = fct_collapse(
+      education,
+      `Secondary\nor lower` = c("Primary School", "Lower Secondary", "O Level", "A Level"),
+      `Post-\nsecondary` = c("National Certificate", "Diploma", "National Diploma", "Higher National Diploma"),
+      Tertiary = c("Bachelor Degree", "Master Degree", "PhD")
+    )
   ) |>
-  make_long(Gender, Usage, Expenditure) |>
-  ggplot(aes(x, next_x = next_x, node = node, next_node = next_node, 
-             label = node, fill = factor(node))) +
-  geom_sankey(flow.alpha = .6) +
-  geom_sankey_label(fill = "white") +
-  theme_sankey() +
-  theme(legend.position = "none") +
-  labs(x = NULL)
+  ggplot(aes(q_fbusage, q_fbexpend, col = gender)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, fullrange = TRUE, linewidth = 0.8) +
+  facet_grid(education ~ age) +
+  labs(x = "Data usage (GB)", y = "Monthly expenditure (BND)", col = "Gender")
 ```
 
+:::
+
+## Grammar of graphics
+
+
+::: {.columns}
+
+::: {.column width=40%}
+
+A statistical graphic is a...
+
+- mapping of **data**
+- which may be **statistically transformed** (summarized, log-transformed, etc.)
+- to **aesthetic attributes** (color, size, xy-position, etc.)
+- using **geometric objects** (points, lines, bars, etc.)
+- and mapped onto a specific **facet** and **coordinate system**
+
+:::
+
+::: {.column width=60%}
+
+::: {.nudge-down}
+![](figures/gglayers.png){fig-align="center" width=95%}
+:::
+
+:::
+
+:::
+
+::: aside
+Source: <http://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html>
+:::
+
+## Breaking down the `ggplot()` call
+
+```{r}
+#| eval: false
+dat |>
+  mutate(
+    # Categorise age
+    age = cut(age, breaks = c(0, 18, 40, 60, Inf),
+              labels = paste0("Age: ", c("< 18", "18-40", "40-60", "60+"))),
+    # Collapse education levels into three groups
+    education = fct_collapse(
+      education,
+      `Secondary\nor lower` = c("Primary School", "Lower Secondary", "O Level", "A Level"),
+      `Post-\nsecondary` = c("National Certificate", "Diploma", "National Diploma", "Higher National Diploma"),
+      Tertiary = c("Bachelor Degree", "Master Degree", "PhD")
+    )
+  ) |>
+  ggplot(aes(x = q_fbusage, y = q_fbexpend, col = gender)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, fullrange = TRUE, linewidth = 0.8) +
+  facet_grid(education ~ age) +
+  labs(x = "Data usage (GB)", y = "Monthly expenditure (BND)", col = "Gender")
+```
+
+## Fun part: Themes!
+
+```{r}
+#| echo: false
+#| message: false
+#| out-width: 100%
+#| fig-height: 4.4
+#| fig-width: 8
+left_join(
+  mutate(bruneimap::census2021, district = gsub("Brunei Muara", "Brunei-Muara", district)),
+  kpg_sf
+) |>
+  mutate(
+    area = as.numeric(area) / 1000 ^ 2,
+    popdens = population / area,
+    district = factor(district, levels = rev(c("Brunei-Muara", "Belait", "Tutong", "Temburong")))
+  ) |> 
+  ggplot(aes(area, population)) +
+  geom_point(aes(col = district, size = popdens), alpha = 0.9) +
+  scale_x_log10() +
+  scale_y_log10(labels = scales::comma) +
+  scale_size_continuous(range = c(2, 15)) +
+  ggthemes::theme_excel() +
+  ggthemes::scale_colour_excel() +
+  guides(colour = guide_legend(reverse = TRUE)) +
+  labs(x = "Area (square kilometres)", y = "Population", 
+       title = "Kampongs in Brunei Darussalam: Area vs Population",
+       subtitle = "Population density is represented by point size",
+       col = "District", size = "Population\ndensity") 
+```
+
+::: aside
+See also: [ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/), [WinWorld](https://winworldpc.com/product/microsoft-excel/97)
+:::
+
+<!-- ## Sankey plots -->
+
+<!-- ```{r} -->
+<!-- #| out-width: 100% -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- library(ggsankey) -->
+<!-- dat |> -->
+<!--   mutate( -->
+<!--     Gender = gender, -->
+<!--     Education = education, -->
+<!--     Expenditure = cut(q_fbexpend, c(0, 50, 100, Inf),  -->
+<!--                      labels = c("< BND50", "BND50-BND100", "> BND100")), -->
+<!--     Usage = cut(q_fbusage, c(0, 1, 5, 10, 50, 100, Inf),  -->
+<!--                     labels = c("< 1GB", "1-5GB", "5-10GB", "10-50GB", "50-100GB", ">100GB")) -->
+<!--   ) |> -->
+<!--   make_long(Gender, Usage, Expenditure) |> -->
+<!--   ggplot(aes(x, next_x = next_x, node = node, next_node = next_node,  -->
+<!--              label = node, fill = factor(node))) + -->
+<!--   geom_sankey(flow.alpha = .6) + -->
+<!--   geom_sankey_label(fill = "white") + -->
+<!--   theme_sankey() + -->
+<!--   theme(legend.position = "none") + -->
+<!--   labs(x = NULL) -->
+<!-- ``` -->
+
+## Spatial data
+
+::::: {.panel-tabset}
+
+### Points
+
+:::: {.columns}
+
+::: {.column width=50%}
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 5
+#| fig-width: 5
+
+ggplot() +
+  geom_sf(data = brn_sf, fill = NA) +
+  geom_point(data = masjid, aes(latitude, longitude), col = viridis::mako(10)[4], size = 1) +
+  theme_void()
+```
+
+:::
+
+::: {.column width=5%}
+:::
+
+::: {.column width=45%}
+Any $(x,y)$ coordinate data, e.g. locations of
+
+- Masjids in Brunei
+- Schools in Brunei
+- Shops
+- etc.
+:::
+
+::::
+
+### Lines
+
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 5
+#| fig-width: 5
+load("../R/aiti_rd.RData")
+ggplot() +
+  geom_sf(data = aiti_sf, fill = NA, col = NA) +
+  geom_sf(data = aiti_rd, aes(col = highway, linewidth = highway), show.legend = FALSE) +
+  scale_linewidth_manual(values = c(0.3, 0.3, 0.9, 0.9, 0.3, 0.6,
+                                    0.6, 0.3, 0.3, 0.4, 0.4, 0.3)) +
+  scale_colour_viridis_d(option = "mako") +
+  theme_void()
+```
+
+:::
+
+::: {.column width=5%}
+:::
+
+::: {.column width=45%}
+A collection of points connected by lines, e.g.
+
+- Roads
+- Rivers
+- Train lines
+- etc.
+
+:::
+
+::::
+
+### Polygons
+
+:::: {.columns}
+
+::: {.column width=50%}
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 5
+#| fig-width: 5
+
+ggplot(kpg_sf) +
+  geom_sf(aes(fill = mukim), col = "gray50", alpha = 0.8, show.legend = FALSE) +
+  geom_sf(data = mkm_sf, col = "black", lwd = 0.5, fill = NA) +
+  geom_sf(data = dplyr::filter(kpg_sf, is.na(mukim)), fill = "gray70", col = "gray70") +
+  ggrepel::geom_label_repel(
+    data = mutate(mkm_sf, mukim = gsub("Mukim ", "", mukim)),    
+    aes(label = mukim, geometry = geometry),
+    size = 2,
+    alpha = 0.9,
+    stat = "sf_coordinates",
+    box.padding = 0.3,
+    max.overlaps = Inf,
+    min.segment.length = 0,       
+    segment.size = 0.3,           
+    segment.curvature = 0.1,      
+    force = 5                     
+  ) +
+  scale_fill_viridis_d(option = "mako") +
+  theme_void()
+```
+
+:::
+
+::: {.column width=5%}
+:::
+
+::: {.column width=45%}
+A closed two-dimensional area formed by connecting a finite number of line segments, e.g.
+
+- Kampongs
+- Mukims
+- Districts
+- etc.
+:::
+
+::::
+
+::::: 
 
 ## Spatial patterns
+
+> Everything is related to everything else, but near things are more related than distant things. ---Waldo Tobler, on the 'First Law of Geography' 
+
+::: {.nudge-down}
+```{r}
+spend_mkm_df <-
+  dat |>
+  summarise(spend = mean(q_fbexpend), .by = mukim)
+head(spend_mkm_df, 8)
+```
+:::
+
+[Understanding spatial ICT spending or usage patterns reveals digital inequality and empowers targeted investments for a more connected, inclusive Brunei.]{.absolute bottom=100 right=50 width="650"}
+
+## Spatial patterns (cont.)
+
+
+::: {.columns}
+
+::: {.column width=50%}
+
+Spatial analysis requires joining
+
+1) spatial (GIS) data, with
+2) geo-coded study data
+
+![](https://github.com/gadenbuie/tidyexplain/raw/main/images/left-join.gif){fig-align="center" width=100%}
+:::
+
+::: {.column width=50%}
+
+```{r}
+#| eval: false
+left_join(
+    mkm_sf,  # spatial
+    spend_mkm_df  # study
+  ) |>
+  ggplot() +
+  geom_sf(aes(fill = spend)) 
+```
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 3.5
+#| fig-width: 5
+left_join(mkm_sf, spend_mkm_df) |>
+  ggplot() +
+  geom_sf(aes(fill = spend)) +
+  scale_fill_viridis_c(
+    name = "Monthly\nexpenditure",
+    na.value = "white",
+    labels = scales::dollar,
+  ) +
+  theme_void()
+```
+
+:::
+
+:::
+
+::: aside
+See also: [`{bruneimap}` package](https://github.com/bruneiverse/bruneimap)
+:::
+
+
+## Quantitative text analysis
+
+![](figures/quantext.png){fig-align="center" width=80%}
+
+```{r}
+# (Comment section) Describe the top reason that limits your internet access.
+head(dat$q_limiting, 5)
+```
+
+## Word clouds and bigrams
 
 ::: {.columns}
 
 ::: {.column width=50%}
 ```{r}
-spend_mkm_df <-
-  dat |>
-  summarise(
-    spend = mean(q_fbexpend), 
-    .by = mukim
-  )
-print(spend_mkm_df)
-```
-:::
-
-::: {.column width=50%}
-```{r}
-# From {bruneimap} package
-glimpse(mkm_sf)
-```
-
-:::
-
-:::
-
-
-## Spatial patterns (cont.)
-
-```{r}
-left_join(mkm_sf, spend_mkm_df) |> # combines the two data frames
-  ggplot() +
-  geom_sf(aes(fill = spend)) +
-  scale_fill_viridis_c(na.value = "white") +
-  theme_minimal() 
-```
-
-
-
-## Word clouds
-
-> (Comment section) Describe briefly the top reason that limits your internet access.
->  
-
-```{r}
-head(dat$q_limiting)
-```
-
-## Word clouds (cont.)
-
-```{r}
 #| echo: false
 #| fig-align: center
+#| fig-width: 5
+#| fig-height: 5
 #| out-width: 100%
 corpus <- 
   Corpus(VectorSource(dat$q_limiting)) |>
@@ -797,12 +1075,14 @@ wordcloud(
   colors     = RColorBrewer::brewer.pal(8, "Dark2")
 )
 ```
+:::
 
-## Bigrams
-
+::: {.column width=50%}
 ```{r}
 #| echo: false
 #| fig-align: center
+#| fig-width: 5
+#| fig-height: 5
 #| out-width: 100%
 bigram_counts <- 
   tibble(text = dat$q_limiting)  |>
@@ -812,7 +1092,10 @@ bigram_counts <-
   unite(bigram, word1, word2, sep = " ") |>
   count(bigram, sort = TRUE) |>
   filter(!bigram %in% c("wi fi")) |>
-  mutate(bigram = str_replace_all(bigram, "wi fi", "wifi"))
+  mutate(
+    bigram = str_replace_all(bigram, "wi fi", "wifi"),
+    bigram = gsub("public wi", "public wifi", bigram)
+  )
 
 bigram_counts$n[2] <- bigram_counts$n[1] + bigram_counts$n[2]  # Adjust a bit
 bigram_counts <- bigram_counts[-1, ]
@@ -833,4 +1116,7 @@ wordcloud(
   colors       = brewer.pal(8, "Dark2")
 )
 ```
+:::
+
+:::
 

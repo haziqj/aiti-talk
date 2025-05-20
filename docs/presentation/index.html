@@ -408,7 +408,7 @@ $ education  &lt;chr&gt; "O Level", "O Level", "O Level", "Higher National Diplo
 $ q_fbspeed  &lt;dbl&gt; 54, 58, 711, 56, 187, 58, 55, 88, 888, 146, 20, 37, 53, 192…
 $ q_fbqual   &lt;chr&gt; "Fair", "Very Good", "Poor", "Very Good", "Good", "Fair", "…
 $ q_mbqual   &lt;chr&gt; "Poor", "Good", "Good", "Good", "Good", "Good", "Good", "Fa…
-$ q_fbexpend &lt;dbl&gt; 782.00000, 78.29368, 745.31846, 78.29368, 640.10037, 622.72…
+$ q_fbexpend &lt;dbl&gt; 782, 53, 744, 53, 635, 617, 34, 601, 590, 34, 588, 8, 574, …
 $ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 190,…
 $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
 </div>
@@ -481,19 +481,20 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>dat <span class="ot">&lt;-</span></span>
 <span id="cb11-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-4"><a href=""></a>    <span class="co"># Convert education to factors</span></span>
-<span id="cb11-5"><a href=""></a>    <span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb11-6"><a href=""></a>      <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>,</span>
-<span id="cb11-7"><a href=""></a>      <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>,</span>
-<span id="cb11-8"><a href=""></a>      <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
-<span id="cb11-9"><a href=""></a>    )),</span>
-<span id="cb11-10"><a href=""></a>    <span class="co"># Convert Likert scale to ordered factors</span></span>
-<span id="cb11-11"><a href=""></a>    <span class="fu">across</span>(<span class="fu">c</span>(q_mbqual, q_fbqual), <span class="cf">function</span>(x) <span class="fu">ordered</span>(x, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb11-12"><a href=""></a>      <span class="st">"Very Poor"</span>, <span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span></span>
-<span id="cb11-13"><a href=""></a>    )))</span>
-<span id="cb11-14"><a href=""></a>  )</span>
-<span id="cb11-15"><a href=""></a></span>
-<span id="cb11-16"><a href=""></a><span class="fu">glimpse</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href=""></a>    <span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)),</span>
+<span id="cb11-5"><a href=""></a>    <span class="co"># Convert education to factors</span></span>
+<span id="cb11-6"><a href=""></a>    <span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb11-7"><a href=""></a>      <span class="st">"Primary School"</span>, <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, </span>
+<span id="cb11-8"><a href=""></a>      <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>, <span class="st">"National Diploma"</span>, </span>
+<span id="cb11-9"><a href=""></a>      <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>, <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
+<span id="cb11-10"><a href=""></a>    )),</span>
+<span id="cb11-11"><a href=""></a>    <span class="co"># Convert Likert scale to ordered factors</span></span>
+<span id="cb11-12"><a href=""></a>    <span class="fu">across</span>(<span class="fu">c</span>(q_mbqual, q_fbqual), <span class="cf">function</span>(x) <span class="fu">ordered</span>(x, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb11-13"><a href=""></a>      <span class="st">"Very Poor"</span>, <span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span></span>
+<span id="cb11-14"><a href=""></a>    )))</span>
+<span id="cb11-15"><a href=""></a>  )</span>
+<span id="cb11-16"><a href=""></a></span>
+<span id="cb11-17"><a href=""></a><span class="fu">glimpse</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </div>
@@ -506,13 +507,13 @@ $ id         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 $ kampong    &lt;chr&gt; "Kg. Lorong Tiga Selatan", "Kg. Anggerek Desa", "Kg. Bebati…
 $ mukim      &lt;chr&gt; "Mukim Seria", "Mukim Berakas A", "Mukim Pangkalan Batu", "…
 $ district   &lt;chr&gt; "Belait", "Brunei-Muara", "Brunei-Muara", "Belait", "Brunei…
-$ gender     &lt;chr&gt; "Female", "Male", "Female", "Male", "Male", "Female", "Male…
+$ gender     &lt;fct&gt; Female, Male, Female, Male, Male, Female, Male, Male, Male,…
 $ age        &lt;dbl&gt; 47, 38, 42, 47, 50, 33, 54, 38, 33, 38, 18, 39, 33, 25, 53,…
 $ education  &lt;fct&gt; O Level, O Level, O Level, Higher National Diploma, Bachelo…
 $ q_fbspeed  &lt;dbl&gt; 54, 58, 711, 56, 187, 58, 55, 88, 888, 146, 20, 37, 53, 192…
 $ q_fbqual   &lt;ord&gt; Fair, Very Good, Poor, Very Good, Good, Fair, Very Good, Ve…
 $ q_mbqual   &lt;ord&gt; Poor, Good, Good, Good, Good, Good, Good, Fair, Very Poor, …
-$ q_fbexpend &lt;dbl&gt; 782.00000, 78.29368, 745.31846, 78.29368, 640.10037, 622.72…
+$ q_fbexpend &lt;dbl&gt; 782, 53, 744, 53, 635, 617, 34, 601, 590, 34, 588, 8, 574, …
 $ q_fbusage  &lt;dbl&gt; 620, 260, 750, 320, 290, 410, 120, 450, 310, 120, 390, 190,…
 $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundreds of…</code></pre>
 </div>
@@ -804,16 +805,16 @@ lm(formula = q_fbexpend ~ q_fbusage, data = dat)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--150.05  -25.56   -6.91   15.91  593.04 
+-155.44  -26.48   -7.16   16.48  614.35 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 55.601997   2.223077   25.01   &lt;2e-16 ***
-q_fbusage    0.215099   0.006861   31.35   &lt;2e-16 ***
+(Intercept) 29.492697   2.302982   12.81   &lt;2e-16 ***
+q_fbusage    0.222830   0.007108   31.35   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 54.07 on 1998 degrees of freedom
+Residual standard error: 56.01 on 1998 degrees of freedom
 Multiple R-squared:  0.3297,    Adjusted R-squared:  0.3294 
 F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
@@ -851,13 +852,13 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">by</span>(dat<span class="sc">$</span>q_fbexpend, dat<span class="sc">$</span>gender, summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>dat$gender: Female
+<pre><code>dat$gender: Male
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   3.00   76.36   99.53  113.27  130.42  782.00 
+ -15.00   54.00   77.00   90.94  109.75  635.00 
 ------------------------------------------------------------ 
-dat$gender: Male
+dat$gender: Female
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  12.65   79.26  101.46  114.92  133.07  640.10 </code></pre>
+ -25.00   51.00   75.00   89.23  107.00  782.00 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">boxplot</span>(q_fbexpend <span class="sc">~</span> gender, dat, <span class="at">range =</span> <span class="dv">5</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">horizontal =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb47-2"><a href=""></a>        <span class="at">ylab =</span> <span class="cn">NULL</span>, <span class="at">xlab =</span> <span class="cn">NULL</span>, <span class="at">main =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -878,16 +879,16 @@ dat$gender: Male
 <div class="cell-output cell-output-stdout">
 <pre><code>        
          Very Poor Poor Fair Good Very Good Excellent
-  Female        16   62  236  333       254       109
-  Male          26   68  204  333       271        88</code></pre>
+  Male          26   68  204  333       271        88
+  Female        16   62  236  333       254       109</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>tab2 <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(tab1, <span class="at">margin =</span> <span class="dv">1</span>)  <span class="co"># row proportions</span></span>
 <span id="cb50-2"><a href=""></a><span class="fu">round</span>(tab2, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        
          Very Poor Poor Fair Good Very Good Excellent
-  Female      0.02 0.06 0.23 0.33      0.25      0.11
-  Male        0.03 0.07 0.21 0.34      0.27      0.09</code></pre>
+  Male        0.03 0.07 0.21 0.34      0.27      0.09
+  Female      0.02 0.06 0.23 0.33      0.25      0.11</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">chisq.test</span>(tab1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -950,12 +951,14 @@ X-squared = 7.575, df = 5, p-value = 0.1813</code></pre>
 </section>
 <section id="more-co-variability" class="slide level2">
 <h2>More co-variability</h2>
-</section>
-<section id="grammar-of-graphics" class="slide level2">
-<h2>Grammar of graphics</h2>
-</section>
-<section id="sankey-plots" class="slide level2">
-<h2>Sankey plots</h2>
+<div class="nudge-up">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/mydata_facets.png" class="quarto-figure quarto-figure-center" style="width:88.0%"></p>
+</figure>
+</div>
+</div>
+<div class="nudge-up-xl">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -965,112 +968,283 @@ X-squared = 7.575, df = 5, p-value = 0.1813</code></pre>
 </div>
 </div>
 </div>
+</div>
 </section>
-<section id="spatial-patterns" class="slide level2">
-<h2>Spatial patterns</h2>
+<section id="grammar-of-graphics" class="slide level2">
+<h2>Grammar of graphics</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
-<span id="cb54-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
-<span id="cb54-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
-<span id="cb54-4"><a href=""></a>    <span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), </span>
-<span id="cb54-5"><a href=""></a>    <span class="at">.by =</span> mukim</span>
-<span id="cb54-6"><a href=""></a>  )</span>
-<span id="cb54-7"><a href=""></a><span class="fu">print</span>(spend_mkm_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 26 × 2
-   mukim                spend
-   &lt;chr&gt;                &lt;dbl&gt;
- 1 Mukim Seria           116.
- 2 Mukim Berakas A       115.
- 3 Mukim Pangkalan Batu  121.
- 4 Mukim Berakas B       113.
- 5 Mukim Kota Batu       137.
- 6 Mukim Tanjong Maya    106.
- 7 Mukim Pekan Tutong    131.
- 8 Mukim Gadong A        120.
- 9 Mukim Kianggeh        103.
-10 Mukim Sengkurong      111.
-# ℹ 16 more rows</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="co"># From {bruneimap} package</span></span>
-<span id="cb56-2"><a href=""></a><span class="fu">glimpse</span>(mkm_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 39
-Columns: 8
-$ id        &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
-$ mukim     &lt;chr&gt; "Mukim Melilas", "Mukim Sukang", "Mukim Kuala Balai", "Mukim…
-$ district  &lt;chr&gt; "Belait", "Belait", "Belait", "Belait", "Belait", "Belait", …
-$ geometry  &lt;POLYGON [°]&gt; POLYGON ((114.8557 4.279265..., POLYGON ((114.4861 4…
-$ X         &lt;dbl&gt; 114.6859, 114.6231, 114.3553, 114.2162, 114.5598, 114.3561, …
-$ Y         &lt;dbl&gt; 4.150033, 4.320123, 4.451268, 4.563085, 4.517770, 4.586257, …
-$ perimeter [m] 123889.885 [m], 140812.844 [m], 79425.123 [m], 57840.929 [m], …
-$ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882…</code></pre>
+<div class="column" style="width:40%;">
+<p>A statistical graphic is a…</p>
+<ul>
+<li>mapping of <strong>data</strong></li>
+<li>which may be <strong>statistically transformed</strong> (summarized, log-transformed, etc.)</li>
+<li>to <strong>aesthetic attributes</strong> (color, size, xy-position, etc.)</li>
+<li>using <strong>geometric objects</strong> (points, lines, bars, etc.)</li>
+<li>and mapped onto a specific <strong>facet</strong> and <strong>coordinate system</strong></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="nudge-down">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/gglayers.png" class="quarto-figure quarto-figure-center" style="width:95.0%"></p>
+</figure>
 </div>
 </div>
 </div></div>
-</section>
-<section id="spatial-patterns-cont." class="slide level2">
-<h2>Spatial patterns (cont.)</h2>
+
+<aside><div>
+<p>Source: <a href="http://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html" class="uri">http://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html</a></p>
+</div></aside></section>
+<section id="breaking-down-the-ggplot-call" class="slide level2">
+<h2>Breaking down the <code>ggplot()</code> call</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">left_join</span>(mkm_sf, spend_mkm_df) <span class="sc">|&gt;</span> <span class="co"># combines the two data frames</span></span>
-<span id="cb58-2"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb58-3"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) <span class="sc">+</span></span>
-<span id="cb58-4"><a href=""></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb58-5"><a href=""></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb54-2"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb54-3"><a href=""></a>    <span class="co"># Categorise age</span></span>
+<span id="cb54-4"><a href=""></a>    <span class="at">age =</span> <span class="fu">cut</span>(age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="cn">Inf</span>),</span>
+<span id="cb54-5"><a href=""></a>              <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Age: "</span>, <span class="fu">c</span>(<span class="st">"&lt; 18"</span>, <span class="st">"18-40"</span>, <span class="st">"40-60"</span>, <span class="st">"60+"</span>))),</span>
+<span id="cb54-6"><a href=""></a>    <span class="co"># Collapse education levels into three groups</span></span>
+<span id="cb54-7"><a href=""></a>    <span class="at">education =</span> <span class="fu">fct_collapse</span>(</span>
+<span id="cb54-8"><a href=""></a>      education,</span>
+<span id="cb54-9"><a href=""></a>      <span class="st">`</span><span class="at">Secondary</span><span class="sc">\n</span><span class="at">or lower</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Primary School"</span>, <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>),</span>
+<span id="cb54-10"><a href=""></a>      <span class="st">`</span><span class="at">Post-</span><span class="sc">\n</span><span class="at">secondary</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>, <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>),</span>
+<span id="cb54-11"><a href=""></a>      <span class="at">Tertiary =</span> <span class="fu">c</span>(<span class="st">"Bachelor Degree"</span>, <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span>)</span>
+<span id="cb54-12"><a href=""></a>    )</span>
+<span id="cb54-13"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb54-14"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> q_fbusage, <span class="at">y =</span> q_fbexpend, <span class="at">col =</span> gender)) <span class="sc">+</span></span>
+<span id="cb54-15"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb54-16"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb54-17"><a href=""></a>  <span class="fu">facet_grid</span>(education <span class="sc">~</span> age) <span class="sc">+</span></span>
+<span id="cb54-18"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Data usage (GB)"</span>, <span class="at">y =</span> <span class="st">"Monthly expenditure (BND)"</span>, <span class="at">col =</span> <span class="st">"Gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fun-part-themes" class="slide level2">
+<h2>Fun part: Themes!</h2>
+<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="word-clouds" class="slide level2">
-<h2>Word clouds</h2>
-<blockquote>
-<p>(Comment section) Describe briefly the top reason that limits your internet access.</p>
-</blockquote>
+
+<!-- ## Sankey plots -->
+<!-- ```{r} -->
+<!-- #| out-width: 100% -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- library(ggsankey) -->
+<!-- dat |> -->
+<!--   mutate( -->
+<!--     Gender = gender, -->
+<!--     Education = education, -->
+<!--     Expenditure = cut(q_fbexpend, c(0, 50, 100, Inf),  -->
+<!--                      labels = c("< BND50", "BND50-BND100", "> BND100")), -->
+<!--     Usage = cut(q_fbusage, c(0, 1, 5, 10, 50, 100, Inf),  -->
+<!--                     labels = c("< 1GB", "1-5GB", "5-10GB", "10-50GB", "50-100GB", ">100GB")) -->
+<!--   ) |> -->
+<!--   make_long(Gender, Usage, Expenditure) |> -->
+<!--   ggplot(aes(x, next_x = next_x, node = node, next_node = next_node,  -->
+<!--              label = node, fill = factor(node))) + -->
+<!--   geom_sankey(flow.alpha = .6) + -->
+<!--   geom_sankey_label(fill = "white") + -->
+<!--   theme_sankey() + -->
+<!--   theme(legend.position = "none") + -->
+<!--   labs(x = NULL) -->
+<!-- ``` -->
+<aside><div>
+<p>See also: <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/">ggthemes</a>, <a href="https://winworldpc.com/product/microsoft-excel/97">WinWorld</a></p>
+</div></aside></section>
+<section id="spatial-data" class="slide level2">
+<h2>Spatial data</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Points</a></li><li><a href="#tabset-1-2">Lines</a></li><li><a href="#tabset-1-3">Polygons</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>Any <span class="math inline">\((x,y)\)</span> coordinate data, e.g.&nbsp;locations of</p>
+<ul>
+<li>Masjids in Brunei</li>
+<li>Schools in Brunei</li>
+<li>Shops</li>
+<li>etc.</li>
+</ul>
+</div></div>
+</div>
+<div id="tabset-1-2">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>A collection of points connected by lines, e.g.</p>
+<ul>
+<li>Roads</li>
+<li>Rivers</li>
+<li>Train lines</li>
+<li>etc.</li>
+</ul>
+</div></div>
+</div>
+<div id="tabset-1-3">
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>A closed two-dimensional area formed by connecting a finite number of line segments, e.g.</p>
+<ul>
+<li>Kampongs</li>
+<li>Mukims</li>
+<li>Districts</li>
+<li>etc.</li>
+</ul>
+</div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="spatial-patterns" class="slide level2">
+<h2>Spatial patterns</h2>
+<blockquote>
+<p>Everything is related to everything else, but near things are more related than distant things. —Waldo Tobler, on the ‘First Law of Geography’</p>
+</blockquote>
+<div class="nudge-down">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
+<span id="cb55-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
+<span id="cb55-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), <span class="at">.by =</span> mukim)</span>
+<span id="cb55-4"><a href=""></a><span class="fu">head</span>(spend_mkm_df, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+  mukim                spend
+  &lt;chr&gt;                &lt;dbl&gt;
+1 Mukim Seria           91.9
+2 Mukim Berakas A       91.5
+3 Mukim Pangkalan Batu  97.3
+4 Mukim Berakas B       88.7
+5 Mukim Kota Batu      114  
+6 Mukim Tanjong Maya    81.9
+7 Mukim Pekan Tutong   107. 
+8 Mukim Gadong A        96.4</code></pre>
+</div>
+</div>
+</div>
+<p><span class="absolute" style="bottom: 100px; right: 50px; width: 650px; ">Understanding spatial ICT spending or usage patterns reveals digital inequality and empowers targeted investments for a more connected, inclusive Brunei.</span></p>
+</section>
+<section id="spatial-patterns-cont." class="slide level2">
+<h2>Spatial patterns (cont.)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Spatial analysis requires joining</p>
+<ol type="1">
+<li>spatial (GIS) data, with</li>
+<li>geo-coded study data</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://github.com/gadenbuie/tidyexplain/raw/main/images/left-join.gif" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">left_join</span>(</span>
+<span id="cb57-2"><a href=""></a>    mkm_sf,  <span class="co"># spatial</span></span>
+<span id="cb57-3"><a href=""></a>    spend_mkm_df  <span class="co"># study</span></span>
+<span id="cb57-4"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb57-5"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb57-6"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+
+<aside><div>
+<p>See also: <a href="https://github.com/bruneiverse/bruneimap"><code>{bruneimap}</code> package</a></p>
+</div></aside></section>
+<section id="quantitative-text-analysis" class="slide level2">
+<h2>Quantitative text analysis</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/quantext.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="co"># (Comment section) Describe the top reason that limits your internet access.</span></span>
+<span id="cb58-2"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I'll almost never download software that costs hundreds of dollars upfront – it's just not worth breaking the bank every five minutes to keep basic services running fine."
 [2] "I'd rather not get internet just to pay an extra $50 for installation that'll likely wear off within a year anyway."                                                       
 [3] "I don't use Video Calls enough because poor calls keep dropping mid-conversation."                                                                                         
 [4] "I wish I had reliable internet at home, but it's so easy for me to just use my neighbor's place when I need it."                                                           
-[5] "I'd love to stream more videos and games if it weren't for how expensive it costs me every month right now."                                                               
-[6] "I wish I had better internet options here because satellite speeds are just so ridiculously slow."                                                                         </code></pre>
+[5] "I'd love to stream more videos and games if it weren't for how expensive it costs me every month right now."                                                               </code></pre>
 </div>
 </div>
 </section>
-<section id="word-clouds-cont." class="slide level2">
-<h2>Word clouds (cont.)</h2>
+<section id="word-clouds-and-bigrams" class="slide level2">
+<h2>Word clouds and bigrams</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="bigrams" class="slide level2">
-<h2>Bigrams</h2>
+</div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+</div></div>
 
 </section></section>
     </div>
