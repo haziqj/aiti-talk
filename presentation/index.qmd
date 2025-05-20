@@ -83,7 +83,7 @@ Source: [R for Data Science (2e)](https://r4ds.hadley.nz/)
 
 ## Why choose R?
 
-R is an interpreted programming language for statistical computing and data visualisation. It has been adopted in many fields, especially statistics and data science.
+R is an interpreted programming language for statistical computing and data visualisation. It has been adopted in many fields, especially quantitive fields like data science.
 
 ![](figures/featuresR.webp){fig-align="center"}
 
