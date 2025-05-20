@@ -29,6 +29,7 @@ library(tidyverse)  # data wrangling tools
 library(tidytext)   # bigrams
 library(tm)         # text mining
 library(wordcloud)  # word clouds
+library(gt)         # pretty tables
 library(gtsummary)  # pretty summary tables
 library(bruneimap)  # for mapping
 theme_set(theme_bw())  # ggplot2
@@ -70,6 +71,7 @@ Specifically, the objectives of the survey were:
 
 This section provides an overview of the demographic characteristics of respondents who participated in the survey. The survey sampled a total of 2,000 respondents across four districts in Brunei Darussalam, comprising Belait (N=303), Brunei-Muara (N=1,453), Temburong (N=25), and Tutong (N=219).
 
+::: {.landscape}
 ```{r}
 #| html-table-processing: none
 #| label: tbl-demographics
@@ -83,8 +85,13 @@ dat |>
   )) |>
   add_overall() |>
   add_p(test.args = education ~ list(simulate.p.value = TRUE)) |>
-  modify_header(label = "**Demographic Characteristics**") 
+  as_gt() |>
+  cols_width(
+    label ~ px(220),
+    everything() ~ px(100),
+  )
 ```
+:::
 
 Overall, there was a balanced gender distribution with 990 (50%) male and 1,010 (51%) female respondents. The proportions were consistent across districts, though notably, Temburong had a higher proportion of male respondents (64%) compared to other districts, but this difference was not statistically significant (p = 0.2).
 
