@@ -41,6 +41,35 @@ execute:
 
 [[Instructions and material available at]{.ubdrubydeepbg} `https://haziqj.ml/ aiti-talk/`]{.absolute top=240 right=90 width="300" height="300"}
 
+## Plan for today
+
+::: {.columns}
+
+::: {.column width=60%}
+| Time               | Activity                                             |
+|-------------------|-----------------------------------------------------|
+| 0830 -- 0900   | Introduction & Getting Started with R                          |
+| 0900 -- 1000  | Lecture 1:  Basic Statistics |
+| 1000 -- 1030 | Break                                                |
+| 1030 -- 1130 | Lecture 2: Advanced R stuff        |
+| 1130 -- 1200 | Networking                                           |
+
+:::
+
+::: {.column width=40%}
+::: {.nudge-down-medium}
+![](figures/qrcode.png){fig-align="center" width=100%}
+
+
+[slido.com](https://app.sli.do/event/pLWWHywY2ryE1VjxE2aDmp) code: 3244786
+:::
+
+
+:::
+
+:::
+
+
 # Let's start {.transition-slide-ubdrubydeep}
 
 ## Introduction
