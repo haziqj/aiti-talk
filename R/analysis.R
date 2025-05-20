@@ -1,4 +1,4 @@
-## ----- Some basics --------------------------------------------------------
+## ----- Some basics -----------------------------------------------------------
 my_string <- "Hello, World!"
 print(my_string)
 
@@ -7,7 +7,8 @@ x <- c(1, 2, 3, 4, 5)
 sum(x) / length(x)
 for (i in x) print(i)
 
-# ----- Load library ---------------------------------------------------
+
+# ----- Load library -----------------------------------------------------------
 library(tidyverse)  # data wrangling tools
 library(tinyplot)   # for quick plotting
 library(tidytext)   # bigrams
@@ -19,11 +20,13 @@ library(bruneimap)  # for mapping
 theme_set(theme_bw())  # ggplot2
 tinytheme("clean2")    # tinyplot
 
-## ----- Import data -------------------------------------------------------------
-dat <- read_csv("R/fake_survey.csv")
+
+## ----- Import data -----------------------------------------------------------
+dat <- read_csv("fake_survey.csv")
 glimpse(dat)
 
-## ----- Transform data ----------------------------------------------------------
+
+## ----- Transform data --------------------------------------------------------
 dat <-
   dat |>
   mutate(
@@ -44,27 +47,8 @@ glimpse(dat)
 head(as.numeric(dat$q_mbqual), 15)
 head(as.numeric(dat$kampong), 15)
 
-## ----- Variability -----------------------------------------------------------------------
-N <- 200
-bind_rows(
-  tibble(x = scales::rescale(rbeta(N, 5, 2), c(1, 5)), case = "Variability present"),
-  tibble(x = rep(3, N), case = "No variability")
-) |>
-  ggplot(aes(x, y = 1)) +
-  geom_violin(fill = "red3", alpha = 0.15, col = NA) +
-  geom_jitter(height = 0.03, width = 0, alpha = 0.5) +
-  facet_grid(case ~ .) +
-  theme_bw() +
-  theme(
-    axis.ticks.y = element_blank(),
-    axis.text.y = element_blank(),
-    axis.title.y = element_blank()
-  ) +
-  coord_cartesian(ylim = c(0.5, 1.5), xlim = c(1, 5)) +
-  labs(title = "How satisfied are you with the quality of your fixed broadband connection?",
-       x = NULL) 
 
-## ----- Summary statistics: AGE -------------------------------------------------------------------------
+## ----- Summary statistics: AGE -----------------------------------------------
 x <- dat$age
 head(x)
 
@@ -76,22 +60,23 @@ sd(x)
 summary(x)
 
 
-## ------ Box plot --------------------------------------------------------------
+## ------ Box plot -------------------------------------------------------------
 boxplot(x, horizontal = TRUE, main = "Boxplot of Age", ylab = "Age", 
         col = "lightblue")
 
 
-## ----- Histogram -------------------------------------------------------
+## ----- Histogram -------------------------------------------------------------
 hist(x, main = "Histogram of Age", xlab = "Age", ylab = "Frequency", 
      col = "lightblue", breaks = 10)
 
 
-## ----- Histograms and density plots ------------------------------------
+## ----- Histograms and density plots ------------------------------------------
 hist(x, main = "Histogram of Age with density overlaid", xlab = "Age", 
      ylab = "Density", col = "lightblue", breaks = 10, prob = TRUE)
 lines(density(x), lwd = 3, col = "red3")
 
-## ----- Summary statistics: GENDER -------------------------------------------------
+
+## ----- Summary statistics: GENDER --------------------------------------------
 x <- dat$gender
 head(x)
 
@@ -106,67 +91,32 @@ prop.table(table(x))
 chisq.test(table(x))
 
 
-## ----- Bar plot -------------------------------------------------------
+## ----- Bar plot --------------------------------------------------------------
 x <- dat$education
 barplot(table(x), las = 2, cex.names = 0.8, main = "Barplot of Education", 
         ylab = "Frequency", col = "lightblue")
 
 
-## ----- Scatter plot ----------------------------------------------------
+## ----- Scatter plot ----------------------------------------------------------
 plot(q_fbexpend ~ q_fbusage, data = dat,
      main = "Monthly expenditure vs data usage", 
      xlab = "Data usage (GB)", ylab = "Monthly expenditure (BND)")
 
 
-## ----- Correlation ----------------------------------------------
+## ----- Correlation -----------------------------------------------------------
 cor(dat$q_fbexpend, dat$q_fbusage) 
-
-# plot
-# install.packages("mvtnorm")
-set.seed(221222)
-n <- 50
-dat1 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 1, 1, 1), ncol = 2))
-dat2 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.8, 0.8, 1), ncol = 2))
-dat3 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.5, 0.5, 1), ncol = 2))
-dat4 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0.2, 0.2, 1), ncol = 2))
-dat5 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, 0, 0, 1), ncol = 2))
-dat6 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -0.2, -0.2, 1), ncol = 2))
-dat7 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -0.8, -0.8, 1), ncol = 2))
-dat8 <- mvtnorm::rmvnorm(n, sigma = matrix(c(1, -1, -1, 1), ncol = 2))
-plot.df <- rbind(
-  data.frame(dat1, rho = 1),
-  data.frame(dat2, rho = 2),
-  data.frame(dat3, rho = 3),
-  data.frame(dat4, rho = 4),
-  data.frame(dat5, rho = 5),
-  data.frame(dat6, rho = 6),
-  data.frame(dat7, rho = 7),
-  data.frame(dat8, rho = 8)
-)
-plot.df$rho <- factor(plot.df$rho)
-levels(plot.df$rho)[1] <- expression(rho * " = 1")
-levels(plot.df$rho)[2] <- expression(rho * " = 0.8")
-levels(plot.df$rho)[3] <- expression(rho * " = 0.5")
-levels(plot.df$rho)[4] <- expression(rho * " = 0.2")
-levels(plot.df$rho)[5] <- expression(rho * " = 0")
-levels(plot.df$rho)[6] <- expression(rho * " = -0.2")
-levels(plot.df$rho)[7] <- expression(rho * " = -0.8")
-levels(plot.df$rho)[8] <- expression(rho * " = -1")
-
-ggplot(plot.df, aes(x = X1, y = X2, group = rho)) +
-  geom_point(size = 1.1) +
-  facet_wrap(. ~ rho, nrow = 2, scales = "free", labeller = label_parsed) +
-  labs(x = "X", y = "Y") +
-  theme_bw() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank()) 
+cor.test(dat$q_fbexpend, dat$q_fbusage)
 
 
-## ------ Linear regression ----------------------------------------------
+## ------ Linear regression ----------------------------------------------------
 fit <- lm(q_fbexpend ~ q_fbusage, data = dat)
 summary(fit)
 
 
-## ----- scatter plot cont. ----------------------------------------------
+## ----- Scatter plot cont. ----------------------------------------------------
+plot(q_fbexpend ~ q_fbusage, data = dat,
+     main = "Monthly expenditure vs data usage", 
+     xlab = "Data usage (GB)", ylab = "Monthly expenditure (BND)")
 abline(fit, col = "red3", lwd = 2)
 
 plot(q_fbexpend ~ q_fbusage, data = dat,
@@ -175,7 +125,7 @@ plot(q_fbexpend ~ q_fbusage, data = dat,
 abline(fit, col = "red3", lwd = 2)
 
 
-## ----- Five-number summary by group ------------------------------------
+## ----- Five-number summary by group ------------------------------------------
 by(dat$q_fbexpend, dat$gender, summary)
 boxplot(q_fbexpend ~ gender, dat, range = 5, col = "lightblue", horizontal = TRUE,
         ylab = NULL, xlab = NULL, main = "Monthly expenditure (BND)")
@@ -198,7 +148,12 @@ dat |>
   ggplot(aes(x = quality, fill = qual_type)) +
   geom_bar(position = "dodge") +
   scale_fill_brewer(palette = "Set1") +
-  labs(x = NULL, y = "Frequency", fill = NULL, title = "Comparison between fixed vs mobile broadband quality satisfaction") +
+  labs(
+    x = NULL, 
+    y = "Frequency", 
+    fill = NULL, 
+    title = "Comparison between fixed vs mobile broadband quality satisfaction"
+  ) +
   theme_bw()
 
 
@@ -236,25 +191,6 @@ titanic |>
 
 
 ## ----- Co-variability ---------------------------------------------------
-dat |>
-  mutate(
-    age = cut(age, breaks = c(0, 18, 40, 60, Inf),
-              labels = paste0("Age: ", c("< 18", "18-40", "40-60", "60+"))),
-    education = fct_collapse(
-      education,
-      `Secondary\nor lower` = c("Primary School", "Lower Secondary", "O Level", "A Level"),
-      `Post-\nsecondary` = c("National Certificate", "Diploma", "National Diploma", "Higher National Diploma"),
-      Tertiary = c("Bachelor Degree", "Master Degree", "PhD")
-    )
-  ) |>
-  ggplot(aes(q_fbusage, q_fbexpend, col = gender)) +
-  geom_point(alpha = 0.6) +
-  geom_smooth(method = "lm", se = FALSE, fullrange = TRUE, linewidth = 0.8) +
-  facet_grid(education ~ age) +
-  labs(x = "Data usage (GB)", y = "Monthly expenditure (BND)", col = "Gender")
-
-
-## ----- ggplot: breakdown -----------------------------------------------
 dat |>
   mutate(
     # Categorise age
@@ -307,7 +243,7 @@ ggplot() +
 
 
 ## ----- spatial: lines --------------------------------------------------
-load("R/aiti_rd.RData")
+load("aiti_rd.RData")
 ggplot() +
   geom_sf(data = aiti_sf, fill = NA, col = NA) +
   geom_sf(data = aiti_rd, aes(col = highway, linewidth = highway), show.legend = FALSE) +
@@ -362,6 +298,7 @@ left_join(mkm_sf, spend_mkm_df) |>
   ) +
   theme_void()
 
+
 ## ----- Word clouds -----------------------------------------------------------
 head(dat$q_limiting, 5)
 
@@ -390,6 +327,7 @@ wordcloud(
   random.order = FALSE,         # plot most frequent words in center
   colors     = RColorBrewer::brewer.pal(8, "Dark2")
 )
+
 
 ## ----- Bigrams ---------------------------------------------------------------
 bigram_counts <- 
