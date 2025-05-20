@@ -53,7 +53,7 @@ dat <-
 ```
 
 ::: {.callout-important}
-This is a sample report based on artificially generated data. 
+This is a sample report based on artificially generated data solely for training and educational purposes. It should not be used to draw real-world inferences or policy decisions.
 :::
 
 ## Introduction
