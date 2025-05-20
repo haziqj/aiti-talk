@@ -46,4 +46,4 @@ We'll take a hands-on approach and even explore how to **recreate parts of the A
 2.  Github Repository ([Link](https://github.com/haziqj/aiti-talk))
 2.  Lecture slides ([Link](https://github.com/haziqj/aiti-talk/presentation/))
 4.  Sample report ([Link](https://haziqj.ml/aiti-talk/R/report.html), [pdf](https://haziqj.ml/aiti-talk/R/report.pdf))
-5. Basic R Summary/Cheat Sheet ([pdf](https://haziqj.ml/aiti-talk/docs/aiti-talk-basic-r-summary.pdf))
+5. Basic R Summary/Cheat Sheet ([pdf](https://haziqj.ml/aiti-talk/aiti-talk-basic-r-summary.pdf))

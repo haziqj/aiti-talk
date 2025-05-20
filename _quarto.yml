@@ -23,6 +23,8 @@ website:
         text: Slides
       - href: R/report.qmd
         text: Report
+      - href: aiti-talk-basic-r-summary.pdf
+        text: Cheat sheet
 
 format:
   html:
