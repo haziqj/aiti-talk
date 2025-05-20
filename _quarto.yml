@@ -19,7 +19,7 @@ website:
         text: Instructions
       - href: https://github.com/haziqj/aiti-talk
         text: Material
-      - href: https://haziqj.ml/aiti-talk/presentation
+      - href: presentation/index.html
         text: Slides
       - href: R/report.qmd
         text: Report

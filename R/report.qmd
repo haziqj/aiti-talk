@@ -15,9 +15,10 @@ authors:
         country: Brunei
         postal-code: BE 1410
 format: 
-  html:
-    code-fold: true
+  html: default
   pdf: default
+execute:
+  echo: false
 ---
 
 
