@@ -242,6 +242,8 @@ We must know the data types of our variables to perform the correct operations o
 
 ## Transforming data {.scrollable}
 
+::: {.nudge-down}
+
 ```{r}
 #| output-location: slide
 dat <-
@@ -263,6 +265,7 @@ glimpse(dat)
 head(as.numeric(dat$q_mbqual), 15)
 head(as.numeric(dat$kampong), 15)
 ```
+:::
 
 
 
@@ -295,26 +298,37 @@ Code everything!!! Reproducibility matters
 
 # Start
 
-
-
-
 ## Variability
 
-Statistics is all about variability.
+At its core, statistics is the **science of understanding _variability_**.
 
-- Graph
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-height: 3
+N <- 200
+bind_rows(
+  tibble(x = scales::rescale(rbeta(N, 5, 2), c(1, 5)), case = "Variability present"),
+  tibble(x = rep(3, N), case = "No variability")
+) |>
+  ggplot(aes(x, y = 1)) +
+  geom_violin(fill = "red3", alpha = 0.15, col = NA) +
+  geom_jitter(height = 0.03, width = 0, alpha = 0.5) +
+  facet_grid(case ~ .) +
+  theme_bw() +
+  theme(
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  coord_cartesian(ylim = c(0.5, 1.5), xlim = c(1, 5)) +
+  labs(title = "How satisfied are you with the quality of your fixed broadband connection?",
+       x = NULL) 
+```
 
-
-
-## Statistical thinking
-
-- Look at data, is it tidy?
-- Clean?
-- Objectives
-
-
-
-
+- No variability = no insight.
+- Segmentation, patterns or predictors of dissatisfaction.
+- Inform policy decisions.
 
 ## Summary statistics
 
@@ -332,46 +346,122 @@ sd(x)
 summary(x)
 ```
 
-## Histograms
+## Boxplots
 
 ```{r}
 #| out-width: 100%
 #| fig-height: 5.2
-tinyplot(x, type = "histogram", main = "Histogram of Age", xlab = "Age", 
-         ylab = "Frequency")
+boxplot(x, horizontal = TRUE, main = "Boxplot of Age", ylab = "Age", 
+        col = "lightblue")
 ```
 
-## Density plots
+
+## Histograms 
 
 ```{r}
 #| out-width: 100%
 #| fig-height: 5.2
-tinyplot(~ age | gender, data = dat, type = "density", main = "Age distribution", 
-         xlab = "Age", fill = "by")
+hist(x, main = "Histogram of Age", xlab = "Age", ylab = "Frequency", 
+     col = "lightblue", breaks = 10)
 ```
 
+## Histograms and density plots
+
+```{r}
+#| out-width: 100%
+#| fig-height: 5
+hist(x, main = "Histogram of Age with density overlaid", xlab = "Age", 
+     ylab = "Density", col = "lightblue", breaks = 10, prob = TRUE)
+lines(density(x), lwd = 3, col = "red3")
+```
+
+
+
+
+
+
+<!-- tinyplot(x, type = "histogram", main = "Histogram of Age", xlab = "Age",  -->
+<!--          ylab = "Frequency") -->
+
+
+<!-- ## Density plots -->
+
+<!-- ```{r} -->
+<!-- #| out-width: 100% -->
+<!-- #| fig-height: 5.2 -->
+<!-- tinyplot(~ age | gender, data = dat, type = "density", main = "Age distribution",  -->
+<!--          xlab = "Age", fill = "by") -->
+<!-- ``` -->
+
+## Summary statistics {.scrollable}
+
+### Nominal (discrete) data 
+
+```{r}
+x <- dat$gender
+head(x)
+
+# No such thing as the 'mean' of character vectors!
+mean(x)
+
+# Instead, do this:
+table(x)
+prop.table(table(x))
+
+# If you're fancy:
+chisq.test(table(x))
+```
 
 ## Bar plots
 
 ```{r}
 #| out-width: 100%
 #| fig-height: 5.2
-tinyplot(~ education, data = dat, type = "barplot")
+x <- dat$education
+barplot(table(x), las = 2, cex.names = 0.8, main = "Barplot of Education", 
+        ylab = "Frequency", col = "lightblue")
 ```
 
-## Bar charts (cont.) {.scrollable}
+## Co-variability
 
-Need to clean up the data a bit. 
+::: {.columns}
+::: {.column width=33%}
+#### Continuous vs continuous
 
-```{r}
-unique(dat$education)
-dat$education <- factor(dat$education, levels = c(
-  "Lower Secondary", "O Level", "A Level", "National Certificate", "Diploma",
-  "National Diploma", "Higher National Diploma", "Bachelor Degree",
-  "Master Degree", "PhD"
-))
-tinyplot(~ education, data = dat, type = "barplot")
-```
+![](figures/cov_contcont.png){fig-align="center" width=90%}
+
+
+:::
+::: {.column width=33%}
+#### Continuous vs nominal
+
+![](figures/cov_contnom.png){fig-align="center" width=90%}
+
+
+:::
+::: {.column width=33%}
+#### Nominal vs nominal
+
+![](figures/cov_nomnom.png){fig-align="center" width=90%}
+
+:::
+:::
+
+
+::: aside
+Source: ChatGPT (gpt-4o)
+:::
+
+<!-- - Continuous vs continuous -->
+<!-- - Continuous vs nominal -->
+<!-- - Nominal vs nominal -->
+
+<!-- ```{r} -->
+
+<!-- ``` -->
+
+
+
 
 ## Side-by-side bar charts {.scrollable}
 

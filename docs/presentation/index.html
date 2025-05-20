@@ -476,6 +476,7 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </section>
 <section id="transforming-data" class="slide level2 scrollable">
 <h2>Transforming data</h2>
+<div class="nudge-down">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>dat <span class="ot">&lt;-</span></span>
 <span id="cb11-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
@@ -495,6 +496,7 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 <span id="cb11-16"><a href=""></a><span class="fu">glimpse</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
+</div>
 </section>
 <section id="transforming-data-output" class="slide level2 scrollable output-location-slide"><h2>Transforming data</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
@@ -560,17 +562,20 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </section>
 <section id="variability" class="slide level2">
 <h2>Variability</h2>
-<p>Statistics is all about variability.</p>
+<p>At its core, statistics is the <strong>science of understanding <em>variability</em></strong>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
-<li>Graph</li>
-</ul>
-</section>
-<section id="statistical-thinking" class="slide level2">
-<h2>Statistical thinking</h2>
-<ul>
-<li>Look at data, is it tidy?</li>
-<li>Clean?</li>
-<li>Objectives</li>
+<li>No variability = no insight.</li>
+<li>Segmentation, patterns or predictors of dissatisfaction.</li>
+<li>Inform policy decisions.</li>
 </ul>
 </section>
 <section id="summary-statistics" class="slide level2">
@@ -599,25 +604,11 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </div>
 </div>
 </section>
-<section id="histograms" class="slide level2">
-<h2>Histograms</h2>
+<section id="boxplots" class="slide level2">
+<h2>Boxplots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">tinyplot</span>(x, <span class="at">type =</span> <span class="st">"histogram"</span>, <span class="at">main =</span> <span class="st">"Histogram of Age"</span>, <span class="at">xlab =</span> <span class="st">"Age"</span>, </span>
-<span id="cb25-2"><a href=""></a>         <span class="at">ylab =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="density-plots" class="slide level2">
-<h2>Density plots</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> age <span class="sc">|</span> gender, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"density"</span>, <span class="at">main =</span> <span class="st">"Age distribution"</span>, </span>
-<span id="cb26-2"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Age"</span>, <span class="at">fill =</span> <span class="st">"by"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">boxplot</span>(x, <span class="at">horizontal =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">"Boxplot of Age"</span>, <span class="at">ylab =</span> <span class="st">"Age"</span>, </span>
+<span id="cb25-2"><a href=""></a>        <span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -627,10 +618,11 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </div>
 </div>
 </section>
-<section id="bar-plots" class="slide level2">
-<h2>Bar plots</h2>
+<section id="histograms" class="slide level2">
+<h2>Histograms</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Histogram of Age"</span>, <span class="at">xlab =</span> <span class="st">"Age"</span>, <span class="at">ylab =</span> <span class="st">"Frequency"</span>, </span>
+<span id="cb26-2"><a href=""></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -640,67 +632,74 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </div>
 </div>
 </section>
-<section id="bar-charts-cont." class="slide level2 scrollable">
-<h2>Bar charts (cont.)</h2>
-<p>Need to clean up the data a bit.</p>
+<section id="histograms-and-density-plots" class="slide level2">
+<h2>Histograms and density plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">unique</span>(dat<span class="sc">$</span>education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">"Histogram of Age with density overlaid"</span>, <span class="at">xlab =</span> <span class="st">"Age"</span>, </span>
+<span id="cb27-2"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">breaks =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-3"><a href=""></a><span class="fu">lines</span>(<span class="fu">density</span>(x), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- tinyplot(x, type = "histogram", main = "Histogram of Age", xlab = "Age",  -->
+<!--          ylab = "Frequency") -->
+<!-- ## Density plots -->
+<!-- ```{r} -->
+<!-- #| out-width: 100% -->
+<!-- #| fig-height: 5.2 -->
+<!-- tinyplot(~ age | gender, data = dat, type = "density", main = "Age distribution",  -->
+<!--          xlab = "Age", fill = "by") -->
+<!-- ``` -->
+</section>
+<section id="summary-statistics-1" class="slide level2 scrollable">
+<h2>Summary statistics</h2>
+<h3 id="nominal-discrete-data">Nominal (discrete) data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>x <span class="ot">&lt;-</span> dat<span class="sc">$</span>gender</span>
+<span id="cb28-2"><a href=""></a><span class="fu">head</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] O Level                 Higher National Diploma Bachelor Degree        
- [4] National Diploma        A Level                 PhD                    
- [7] Lower Secondary         National Certificate    Diploma                
-[10] Master Degree           &lt;NA&gt;                   
-10 Levels: Lower Secondary O Level A Level National Certificate ... PhD</code></pre>
+<pre><code>[1] "Female" "Male"   "Female" "Male"   "Male"   "Female"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>dat<span class="sc">$</span>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>education, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb30-2"><a href=""></a>  <span class="st">"Lower Secondary"</span>, <span class="st">"O Level"</span>, <span class="st">"A Level"</span>, <span class="st">"National Certificate"</span>, <span class="st">"Diploma"</span>,</span>
-<span id="cb30-3"><a href=""></a>  <span class="st">"National Diploma"</span>, <span class="st">"Higher National Diploma"</span>, <span class="st">"Bachelor Degree"</span>,</span>
-<span id="cb30-4"><a href=""></a>  <span class="st">"Master Degree"</span>, <span class="st">"PhD"</span></span>
-<span id="cb30-5"><a href=""></a>))</span>
-<span id="cb30-6"><a href=""></a><span class="fu">tinyplot</span>(<span class="sc">~</span> education, <span class="at">data =</span> dat, <span class="at">type =</span> <span class="st">"barplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># No such thing as the 'mean' of character vectors!</span></span>
+<span id="cb30-2"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="co"># Instead, do this:</span></span>
+<span id="cb32-2"><a href=""></a><span class="fu">table</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x
+Female   Male 
+  1010    990 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">prop.table</span>(<span class="fu">table</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x
+Female   Male 
+ 0.505  0.495 </code></pre>
 </div>
-</section>
-<section id="side-by-side-bar-charts" class="slide level2 scrollable">
-<h2>Side-by-side bar charts</h2>
-<!-- 3. Quality of broadband internet access [bar chart side by side] -->
-<!-- Excellent; V Good; Good; Fair; Poor; V Poor -->
-<!-- MOBILE:    10, 28, 30, 34, 17, 4, 1 -->
-<!-- BROADBAND: 10, 28, 34, 20, 6, 2 -->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>the_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span>)</span>
-<span id="cb31-2"><a href=""></a>dat <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb31-4"><a href=""></a>    <span class="at">q_fbqual =</span> <span class="fu">factor</span>(q_fbqual, <span class="at">levels =</span> the_levels),</span>
-<span id="cb31-5"><a href=""></a>    <span class="at">q_mbqual =</span> <span class="fu">factor</span>(q_mbqual, <span class="at">levels =</span> the_levels)</span>
-<span id="cb31-6"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb31-7"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(q_fbqual, q_mbqual), <span class="at">names_to =</span> <span class="st">"qual_type"</span>, </span>
-<span id="cb31-8"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"quality"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">qual_type =</span> <span class="fu">recode</span>(qual_type, <span class="at">q_fbqual =</span> <span class="st">"Broadband"</span>, </span>
-<span id="cb31-10"><a href=""></a>                            <span class="at">q_mbqual =</span> <span class="st">"Mobile"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb31-11"><a href=""></a>  <span class="fu">tinyplot</span>(<span class="at">x =</span> <span class="sc">~</span> quality <span class="sc">|</span> qual_type, <span class="at">type =</span> <span class="st">"barplot"</span>, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:100.0%"></p>
-</figure>
-</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># If you're fancy:</span></span>
+<span id="cb36-2"><a href=""></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  table(x)
+X-squared = 0.2, df = 1, p-value = 0.6547</code></pre>
 </div>
 </div>
 </section>
-<section id="scatter-plots" class="slide level2">
-<h2>Scatter plots</h2>
+<section id="bar-plots" class="slide level2">
+<h2>Bar plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">tinyplot</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb32-2"><a href=""></a>         <span class="at">main =</span> <span class="st">"Monthly expenditure vs data usage"</span>, </span>
-<span id="cb32-3"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Data usage (GB)"</span>, <span class="at">ylab =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span>
-<span id="cb32-4"><a href=""></a><span class="fu">tinyplot_add</span>(<span class="at">type =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>x <span class="ot">&lt;-</span> dat<span class="sc">$</span>education</span>
+<span id="cb38-2"><a href=""></a><span class="fu">barplot</span>(<span class="fu">table</span>(x), <span class="at">las =</span> <span class="dv">2</span>, <span class="at">cex.names =</span> <span class="fl">0.8</span>, <span class="at">main =</span> <span class="st">"Barplot of Education"</span>, </span>
+<span id="cb38-3"><a href=""></a>        <span class="at">ylab =</span> <span class="st">"Frequency"</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -710,10 +709,87 @@ $ q_limiting &lt;chr&gt; "I'll almost never download software that costs hundred
 </div>
 </div>
 </section>
+<section id="co-variability" class="slide level2">
+<h2>Co-variability</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h4 id="continuous-vs-continuous">Continuous vs continuous</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/cov_contcont.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<h4 id="continuous-vs-nominal">Continuous vs nominal</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/cov_contnom.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<h4 id="nominal-vs-nominal">Nominal vs nominal</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/cov_nomnom.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div></div>
+
+<!-- - Continuous vs continuous -->
+<!-- - Continuous vs nominal -->
+<!-- - Nominal vs nominal -->
+<!-- ```{r} -->
+<!-- ``` -->
+<aside><div>
+<p>Source: ChatGPT (gpt-4o)</p>
+</div></aside></section>
+<section id="side-by-side-bar-charts" class="slide level2 scrollable">
+<h2>Side-by-side bar charts</h2>
+<!-- 3. Quality of broadband internet access [bar chart side by side] -->
+<!-- Excellent; V Good; Good; Fair; Poor; V Poor -->
+<!-- MOBILE:    10, 28, 30, 34, 17, 4, 1 -->
+<!-- BROADBAND: 10, 28, 34, 20, 6, 2 -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>the_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Excellent"</span>)</span>
+<span id="cb39-2"><a href=""></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb39-4"><a href=""></a>    <span class="at">q_fbqual =</span> <span class="fu">factor</span>(q_fbqual, <span class="at">levels =</span> the_levels),</span>
+<span id="cb39-5"><a href=""></a>    <span class="at">q_mbqual =</span> <span class="fu">factor</span>(q_mbqual, <span class="at">levels =</span> the_levels)</span>
+<span id="cb39-6"><a href=""></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb39-7"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(q_fbqual, q_mbqual), <span class="at">names_to =</span> <span class="st">"qual_type"</span>, </span>
+<span id="cb39-8"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"quality"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">qual_type =</span> <span class="fu">recode</span>(qual_type, <span class="at">q_fbqual =</span> <span class="st">"Broadband"</span>, </span>
+<span id="cb39-10"><a href=""></a>                            <span class="at">q_mbqual =</span> <span class="st">"Mobile"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb39-11"><a href=""></a>  <span class="fu">tinyplot</span>(<span class="at">x =</span> <span class="sc">~</span> quality <span class="sc">|</span> qual_type, <span class="at">type =</span> <span class="st">"barplot"</span>, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-plots" class="slide level2">
+<h2>Scatter plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">tinyplot</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb40-2"><a href=""></a>         <span class="at">main =</span> <span class="st">"Monthly expenditure vs data usage"</span>, </span>
+<span id="cb40-3"><a href=""></a>         <span class="at">xlab =</span> <span class="st">"Data usage (GB)"</span>, <span class="at">ylab =</span> <span class="st">"Monthly expenditure (BND)"</span>)</span>
+<span id="cb40-4"><a href=""></a><span class="fu">tinyplot_add</span>(<span class="at">type =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">cor.test</span>(dat<span class="sc">$</span>q_fbexpend, dat<span class="sc">$</span>q_fbusage)  <span class="co"># or just cor()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">cor.test</span>(dat<span class="sc">$</span>q_fbexpend, dat<span class="sc">$</span>q_fbusage)  <span class="co"># or just cor()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -739,8 +815,8 @@ y = \beta_0 + \beta_1 x + \epsilon \\
 \]</span></p>
 <p>We can fit this model in R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat)</span>
-<span id="cb35-2"><a href=""></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> q_fbusage, <span class="at">data =</span> dat)</span>
+<span id="cb43-2"><a href=""></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -766,32 +842,32 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="nice-output-for-lm" class="slide level2">
 <h2>Nice output for <code>lm()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> age <span class="sc">+</span> q_fbqual <span class="sc">+</span> q_fbusage, <span class="at">data =</span> dat)</span>
-<span id="cb37-2"><a href=""></a>gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(</span>
-<span id="cb37-3"><a href=""></a>  fit,</span>
-<span id="cb37-4"><a href=""></a>  <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, q_fbqual <span class="sc">~</span> <span class="st">"Broadband quality"</span>,</span>
-<span id="cb37-5"><a href=""></a>               q_fbusage <span class="sc">~</span> <span class="st">"Data usage"</span>)</span>
-<span id="cb37-6"><a href=""></a>) <span class="sc">|&gt;</span></span>
-<span id="cb37-7"><a href=""></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
-<span id="cb37-8"><a href=""></a>  <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(q_fbexpend <span class="sc">~</span> age <span class="sc">+</span> q_fbqual <span class="sc">+</span> q_fbusage, <span class="at">data =</span> dat)</span>
+<span id="cb45-2"><a href=""></a>gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(</span>
+<span id="cb45-3"><a href=""></a>  fit,</span>
+<span id="cb45-4"><a href=""></a>  <span class="at">label =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, q_fbqual <span class="sc">~</span> <span class="st">"Broadband quality"</span>,</span>
+<span id="cb45-5"><a href=""></a>               q_fbusage <span class="sc">~</span> <span class="st">"Data usage"</span>)</span>
+<span id="cb45-6"><a href=""></a>) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a href=""></a>  <span class="fu">bold_labels</span>() <span class="sc">|&gt;</span></span>
+<span id="cb45-8"><a href=""></a>  <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="wqmswiqkrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wqmswiqkrz table {
+<div id="iuhuxqpdqw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iuhuxqpdqw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wqmswiqkrz thead, #wqmswiqkrz tbody, #wqmswiqkrz tfoot, #wqmswiqkrz tr, #wqmswiqkrz td, #wqmswiqkrz th {
+#iuhuxqpdqw thead, #iuhuxqpdqw tbody, #iuhuxqpdqw tfoot, #iuhuxqpdqw tr, #iuhuxqpdqw td, #iuhuxqpdqw th {
   border-style: none;
 }
 
-#wqmswiqkrz p {
+#iuhuxqpdqw p {
   margin: 0;
   padding: 0;
 }
 
-#wqmswiqkrz .gt_table {
+#iuhuxqpdqw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -817,12 +893,12 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_caption {
+#iuhuxqpdqw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wqmswiqkrz .gt_title {
+#iuhuxqpdqw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -834,7 +910,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#wqmswiqkrz .gt_subtitle {
+#iuhuxqpdqw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -846,7 +922,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#wqmswiqkrz .gt_heading {
+#iuhuxqpdqw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -858,13 +934,13 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_bottom_border {
+#iuhuxqpdqw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_col_headings {
+#iuhuxqpdqw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -879,7 +955,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_col_heading {
+#iuhuxqpdqw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -899,7 +975,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#wqmswiqkrz .gt_column_spanner_outer {
+#iuhuxqpdqw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -911,15 +987,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#wqmswiqkrz .gt_column_spanner_outer:first-child {
+#iuhuxqpdqw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wqmswiqkrz .gt_column_spanner_outer:last-child {
+#iuhuxqpdqw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wqmswiqkrz .gt_column_spanner {
+#iuhuxqpdqw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -931,11 +1007,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#wqmswiqkrz .gt_spanner_row {
+#iuhuxqpdqw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wqmswiqkrz .gt_group_heading {
+#iuhuxqpdqw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -961,7 +1037,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#wqmswiqkrz .gt_empty_group_heading {
+#iuhuxqpdqw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -976,15 +1052,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#wqmswiqkrz .gt_from_md > :first-child {
+#iuhuxqpdqw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wqmswiqkrz .gt_from_md > :last-child {
+#iuhuxqpdqw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wqmswiqkrz .gt_row {
+#iuhuxqpdqw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1079,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#wqmswiqkrz .gt_stub {
+#iuhuxqpdqw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1016,7 +1092,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wqmswiqkrz .gt_stub_row_group {
+#iuhuxqpdqw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1030,15 +1106,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#wqmswiqkrz .gt_row_group_first td {
+#iuhuxqpdqw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wqmswiqkrz .gt_row_group_first th {
+#iuhuxqpdqw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wqmswiqkrz .gt_summary_row {
+#iuhuxqpdqw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1048,16 +1124,16 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wqmswiqkrz .gt_first_summary_row {
+#iuhuxqpdqw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_first_summary_row.thick {
+#iuhuxqpdqw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wqmswiqkrz .gt_last_summary_row {
+#iuhuxqpdqw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1067,7 +1143,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_grand_summary_row {
+#iuhuxqpdqw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1077,7 +1153,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wqmswiqkrz .gt_first_grand_summary_row {
+#iuhuxqpdqw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1087,7 +1163,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_last_grand_summary_row_top {
+#iuhuxqpdqw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1097,11 +1173,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_striped {
+#iuhuxqpdqw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wqmswiqkrz .gt_table_body {
+#iuhuxqpdqw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1110,7 +1186,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_footnotes {
+#iuhuxqpdqw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1124,7 +1200,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_footnote {
+#iuhuxqpdqw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1133,7 +1209,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wqmswiqkrz .gt_sourcenotes {
+#iuhuxqpdqw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1147,7 +1223,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wqmswiqkrz .gt_sourcenote {
+#iuhuxqpdqw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1155,72 +1231,72 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wqmswiqkrz .gt_left {
+#iuhuxqpdqw .gt_left {
   text-align: left;
 }
 
-#wqmswiqkrz .gt_center {
+#iuhuxqpdqw .gt_center {
   text-align: center;
 }
 
-#wqmswiqkrz .gt_right {
+#iuhuxqpdqw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wqmswiqkrz .gt_font_normal {
+#iuhuxqpdqw .gt_font_normal {
   font-weight: normal;
 }
 
-#wqmswiqkrz .gt_font_bold {
+#iuhuxqpdqw .gt_font_bold {
   font-weight: bold;
 }
 
-#wqmswiqkrz .gt_font_italic {
+#iuhuxqpdqw .gt_font_italic {
   font-style: italic;
 }
 
-#wqmswiqkrz .gt_super {
+#iuhuxqpdqw .gt_super {
   font-size: 65%;
 }
 
-#wqmswiqkrz .gt_footnote_marks {
+#iuhuxqpdqw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wqmswiqkrz .gt_asterisk {
+#iuhuxqpdqw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wqmswiqkrz .gt_indent_1 {
+#iuhuxqpdqw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wqmswiqkrz .gt_indent_2 {
+#iuhuxqpdqw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wqmswiqkrz .gt_indent_3 {
+#iuhuxqpdqw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wqmswiqkrz .gt_indent_4 {
+#iuhuxqpdqw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wqmswiqkrz .gt_indent_5 {
+#iuhuxqpdqw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wqmswiqkrz .katex-display {
+#iuhuxqpdqw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wqmswiqkrz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iuhuxqpdqw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1257,43 +1333,36 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Very Poor</td>
-<td class="gt_row gt_center" headers="estimate">â€”</td>
-<td class="gt_row gt_center" headers="conf.low">â€”</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;q_fbqual.L</td>
+<td class="gt_row gt_center" headers="estimate">-8.0</td>
+<td class="gt_row gt_center" headers="conf.low">-20, 3.8</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Poor</td>
-<td class="gt_row gt_center" headers="estimate">-17</td>
-<td class="gt_row gt_center" headers="conf.low">-36, 3.0</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;q_fbqual.Q</td>
+<td class="gt_row gt_center" headers="estimate">3.5</td>
+<td class="gt_row gt_center" headers="conf.low">-7.2, 14</td>
+<td class="gt_row gt_center" headers="p.value">0.5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;q_fbqual.C</td>
+<td class="gt_row gt_center" headers="estimate">-6.5</td>
+<td class="gt_row gt_center" headers="conf.low">-16, 2.6</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;q_fbqual^4</td>
+<td class="gt_row gt_center" headers="estimate">6.2</td>
+<td class="gt_row gt_center" headers="conf.low">-1.3, 14</td>
 <td class="gt_row gt_center" headers="p.value">0.10</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Fair</td>
-<td class="gt_row gt_center" headers="estimate">-7.7</td>
-<td class="gt_row gt_center" headers="conf.low">-25, 10</td>
-<td class="gt_row gt_center" headers="p.value">0.4</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;q_fbqual^5</td>
+<td class="gt_row gt_center" headers="estimate">-4.8</td>
+<td class="gt_row gt_center" headers="conf.low">-10, 0.80</td>
+<td class="gt_row gt_center" headers="p.value">0.093</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Good</td>
-<td class="gt_row gt_center" headers="estimate">-12</td>
-<td class="gt_row gt_center" headers="conf.low">-29, 5.7</td>
-<td class="gt_row gt_center" headers="p.value">0.2</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Very Good</td>
-<td class="gt_row gt_center" headers="estimate">-12</td>
-<td class="gt_row gt_center" headers="conf.low">-30, 5.2</td>
-<td class="gt_row gt_center" headers="p.value">0.2</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Excellent</td>
-<td class="gt_row gt_center" headers="estimate">-15</td>
-<td class="gt_row gt_center" headers="conf.low">-34, 3.6</td>
-<td class="gt_row gt_center" headers="p.value">0.11</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label" style="font-weight: bold">Data usage</td>
 <td class="gt_row gt_center" headers="estimate">0.22</td>
 <td class="gt_row gt_center" headers="conf.low">0.21, 0.24</td>
@@ -1314,29 +1383,29 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="tables" class="slide level2 scrollable">
 <h2>Tables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dat <span class="sc">|&gt;</span></span>
-<span id="cb38-2"><a href=""></a>  <span class="fu">select</span>(gender, age, education, q_fbexpend, q_fbusage) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href=""></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gender) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href=""></a>  <span class="fu">add_overall</span>() <span class="sc">|&gt;</span></span>
-<span id="cb38-5"><a href=""></a>  <span class="fu">add_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>dat <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">select</span>(gender, age, education, q_fbexpend, q_fbusage) <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href=""></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> gender) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href=""></a>  <span class="fu">add_overall</span>() <span class="sc">|&gt;</span></span>
+<span id="cb46-5"><a href=""></a>  <span class="fu">add_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="xqyegvsymt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xqyegvsymt table {
+<div id="iggckvnrsj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iggckvnrsj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xqyegvsymt thead, #xqyegvsymt tbody, #xqyegvsymt tfoot, #xqyegvsymt tr, #xqyegvsymt td, #xqyegvsymt th {
+#iggckvnrsj thead, #iggckvnrsj tbody, #iggckvnrsj tfoot, #iggckvnrsj tr, #iggckvnrsj td, #iggckvnrsj th {
   border-style: none;
 }
 
-#xqyegvsymt p {
+#iggckvnrsj p {
   margin: 0;
   padding: 0;
 }
 
-#xqyegvsymt .gt_table {
+#iggckvnrsj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1362,12 +1431,12 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_caption {
+#iggckvnrsj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xqyegvsymt .gt_title {
+#iggckvnrsj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1379,7 +1448,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#xqyegvsymt .gt_subtitle {
+#iggckvnrsj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1391,7 +1460,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#xqyegvsymt .gt_heading {
+#iggckvnrsj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1403,13 +1472,13 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_bottom_border {
+#iggckvnrsj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_col_headings {
+#iggckvnrsj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1424,7 +1493,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_col_heading {
+#iggckvnrsj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1444,7 +1513,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#xqyegvsymt .gt_column_spanner_outer {
+#iggckvnrsj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1456,15 +1525,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#xqyegvsymt .gt_column_spanner_outer:first-child {
+#iggckvnrsj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xqyegvsymt .gt_column_spanner_outer:last-child {
+#iggckvnrsj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xqyegvsymt .gt_column_spanner {
+#iggckvnrsj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1476,11 +1545,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#xqyegvsymt .gt_spanner_row {
+#iggckvnrsj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xqyegvsymt .gt_group_heading {
+#iggckvnrsj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1506,7 +1575,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#xqyegvsymt .gt_empty_group_heading {
+#iggckvnrsj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1521,15 +1590,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#xqyegvsymt .gt_from_md > :first-child {
+#iggckvnrsj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xqyegvsymt .gt_from_md > :last-child {
+#iggckvnrsj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xqyegvsymt .gt_row {
+#iggckvnrsj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1548,7 +1617,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#xqyegvsymt .gt_stub {
+#iggckvnrsj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1561,7 +1630,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#xqyegvsymt .gt_stub_row_group {
+#iggckvnrsj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1575,15 +1644,15 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#xqyegvsymt .gt_row_group_first td {
+#iggckvnrsj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xqyegvsymt .gt_row_group_first th {
+#iggckvnrsj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xqyegvsymt .gt_summary_row {
+#iggckvnrsj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1593,16 +1662,16 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#xqyegvsymt .gt_first_summary_row {
+#iggckvnrsj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_first_summary_row.thick {
+#iggckvnrsj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xqyegvsymt .gt_last_summary_row {
+#iggckvnrsj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1612,7 +1681,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_grand_summary_row {
+#iggckvnrsj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1622,7 +1691,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#xqyegvsymt .gt_first_grand_summary_row {
+#iggckvnrsj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1632,7 +1701,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_last_grand_summary_row_top {
+#iggckvnrsj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1642,11 +1711,11 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_striped {
+#iggckvnrsj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xqyegvsymt .gt_table_body {
+#iggckvnrsj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1655,7 +1724,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_footnotes {
+#iggckvnrsj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1669,7 +1738,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_footnote {
+#iggckvnrsj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1678,7 +1747,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#xqyegvsymt .gt_sourcenotes {
+#iggckvnrsj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1692,7 +1761,7 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xqyegvsymt .gt_sourcenote {
+#iggckvnrsj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1700,72 +1769,72 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#xqyegvsymt .gt_left {
+#iggckvnrsj .gt_left {
   text-align: left;
 }
 
-#xqyegvsymt .gt_center {
+#iggckvnrsj .gt_center {
   text-align: center;
 }
 
-#xqyegvsymt .gt_right {
+#iggckvnrsj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xqyegvsymt .gt_font_normal {
+#iggckvnrsj .gt_font_normal {
   font-weight: normal;
 }
 
-#xqyegvsymt .gt_font_bold {
+#iggckvnrsj .gt_font_bold {
   font-weight: bold;
 }
 
-#xqyegvsymt .gt_font_italic {
+#iggckvnrsj .gt_font_italic {
   font-style: italic;
 }
 
-#xqyegvsymt .gt_super {
+#iggckvnrsj .gt_super {
   font-size: 65%;
 }
 
-#xqyegvsymt .gt_footnote_marks {
+#iggckvnrsj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xqyegvsymt .gt_asterisk {
+#iggckvnrsj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xqyegvsymt .gt_indent_1 {
+#iggckvnrsj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xqyegvsymt .gt_indent_2 {
+#iggckvnrsj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xqyegvsymt .gt_indent_3 {
+#iggckvnrsj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xqyegvsymt .gt_indent_4 {
+#iggckvnrsj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xqyegvsymt .gt_indent_5 {
+#iggckvnrsj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xqyegvsymt .katex-display {
+#iggckvnrsj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xqyegvsymt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iggckvnrsj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1927,13 +1996,13 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
-<span id="cb39-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
-<span id="cb39-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
-<span id="cb39-4"><a href=""></a>    <span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), </span>
-<span id="cb39-5"><a href=""></a>    <span class="at">.by =</span> mukim</span>
-<span id="cb39-6"><a href=""></a>  )</span>
-<span id="cb39-7"><a href=""></a><span class="fu">print</span>(spend_mkm_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>spend_mkm_df <span class="ot">&lt;-</span></span>
+<span id="cb47-2"><a href=""></a>  dat <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb47-4"><a href=""></a>    <span class="at">spend =</span> <span class="fu">mean</span>(q_fbexpend), </span>
+<span id="cb47-5"><a href=""></a>    <span class="at">.by =</span> mukim</span>
+<span id="cb47-6"><a href=""></a>  )</span>
+<span id="cb47-7"><a href=""></a><span class="fu">print</span>(spend_mkm_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 Ã— 2
    mukim                spend
@@ -1953,8 +2022,8 @@ F-statistic: 982.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="co"># From {bruneimap} package</span></span>
-<span id="cb41-2"><a href=""></a><span class="fu">glimpse</span>(mkm_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="co"># From {bruneimap} package</span></span>
+<span id="cb49-2"><a href=""></a><span class="fu">glimpse</span>(mkm_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 39
 Columns: 8
@@ -1973,15 +2042,15 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882â€
 <section id="spatial-patterns-cont." class="slide level2">
 <h2>Spatial patterns (cont.)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">left_join</span>(mkm_sf, spend_mkm_df) <span class="sc">|&gt;</span> <span class="co"># combines the two data frames</span></span>
-<span id="cb43-2"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb43-3"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) <span class="sc">+</span></span>
-<span id="cb43-4"><a href=""></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb43-5"><a href=""></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">left_join</span>(mkm_sf, spend_mkm_df) <span class="sc">|&gt;</span> <span class="co"># combines the two data frames</span></span>
+<span id="cb51-2"><a href=""></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-3"><a href=""></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> spend)) <span class="sc">+</span></span>
+<span id="cb51-4"><a href=""></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">na.value =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href=""></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1993,7 +2062,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882â€
 <p>(Comment section) Describe briefly the top reason that limits your internet access.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">head</span>(dat<span class="sc">$</span>q_limiting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I'll almost never download software that costs hundreds of dollars upfront â€“ it's just not worth breaking the bank every five minutes to keep basic services running fine."
 [2] "I'd rather not get internet just to pay an extra $50 for installation that'll likely wear off within a year anyway."                                                       
@@ -2010,7 +2079,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882â€
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2022,7 +2091,7 @@ $ area      [m^2] 610141518.5 [m^2], 818701681.1 [m^2], 321489759.1 [m^2], 882â€
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
