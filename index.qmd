@@ -2,39 +2,48 @@
 title: "R for Data Science"
 ---
 
-Goal is to give an introductory talk about R software and ecosystem, and how it can be useful to produce data products such as reports with tables and visualisations.
-In particular, I will show how to use R to "reproduce" some elements of the the AITI ICT Survey Report 2022.
+## Introduction
 
-The format will be lecture style with hands-on "follow along" (code will be provided). 
-There will be two teaching assistants on hand to help out with any questions.
-Everyone should bring their own laptop with R and RStudio installed.
+Welcome to our **introductory session on R software and its powerful ecosystem**. Learn how R can be used to produce compelling data products, such as reports with rich tables and visualizations.
 
-No prior knowledge of R is required.
+We'll take a hands-on approach and even explore how to **recreate parts of the AITI ICT Survey Report 2022** using R and Quarto.
 
-## Schedule
+## 🧑‍🏫 Format
 
-Date: Wednesday 21 May 2025  
-Time: 8.30am-12.00pm
+-   **Lecture-style** sessions with *live coding*.
+-   Code will be provided for participants to follow along.
+-   Two teaching assistants will be available for one-on-one help.
 
-- 8.30am--9.00am: Intro & Admin 
-- 9.00am--10.00am: Lecture 1 (Getting started with R and basic statistics) 
-- 10.00am--10.30am: Break 
-- 10.30am--11.30am: Lecture 2 (Reproducible research using Quarto) 
-- 11.30am--12.00pm: Networking 
+💻 *Participants must bring a laptop with R and RStudio installed.*
 
-## Facilitators
+🚫 *No prior knowledge of R is required.*
 
-Speaker: Dr. Haziq Jamil 
+## 📅 Schedule
 
-Assistants:
-  1. Hafeezul Raziq
-  2. Alvin Bong
-  
-## Material
+**Date:** Wednesday, 21 May 2025\
+**Time:** 8.30am -- 12.00pm
 
-(To be updated)
+| Time               | Activity                                             |
+|------------------|------------------------------------------------------|
+| 8.30am -- 9.00am   | Introduction & Admin                                 |
+| 9.00am -- 10.00am  | Lecture 1: Getting Started with R + Basic Statistics |
+| 10.00am -- 10.30am | Break                                                |
+| 10.30am -- 11.30am | Lecture 2: Reproducible Research with Quarto         |
+| 11.30am -- 12.00pm | Networking                                           |
 
-1. Instructions ([html](https://haziqj.ml/aiti-talk/instructions/), [pdf](https://haziqj.ml/aiti-talk/instructions/instructions.pdf))
-2. Lecture slides
-3. R code 
-4. Sample report
+## 👥 Facilitators
+
+**Speaker:**\
+[Dr. Haziq Jamil](https://haziqj.ml/)
+
+**Assistants:**\
+1. [Hafeezul Raziq](https://hafeezulrzq.github.io/) \
+2. [Alvin Bong](https://alvinbjl.github.io/)
+
+## 📂 Materials
+
+1.  Instructions ([html](https://haziqj.ml/aiti-talk/instructions/), [pdf](https://haziqj.ml/aiti-talk/instructions/instructions.pdf))
+2.  Github Repository ([Link](https://github.com/haziqj/aiti-talk))
+2.  Lecture slides ([Link](https://github.com/haziqj/aiti-talk/presentation/))
+4.  Sample report ([Link](https://haziqj.ml/aiti-talk/R/report.html), [pdf](https://haziqj.ml/aiti-talk/R/report.pdf))
+5. Basic R Summary/Cheat Sheet ([pdf](https://haziqj.ml/aiti-talk/docs/aiti-talk-basic-r-summary.pdf))

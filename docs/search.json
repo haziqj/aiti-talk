@@ -4,7 +4,7 @@
     "href": "instructions/index.html",
     "title": "🛠 Machine Setup",
     "section": "",
-    "text": "Welcome! Prior to attending the seminar talk, please ensure you have done the following.\n\n1. Install R and RStudio\n\nDownload both software at https://posit.co/download/rstudio-desktop/.\nOnce the download completes, double-click on the .exe file to run the installer. Simply follow the steps of the installer to finish.\n\n\nNote: These are two different softwares, so please ensure you have installed both of them. For more detailed guideline, visit link.\n\n\n\n2. Download Workshop material\n\nVisit https://github.com/haziqj/aiti-talk on your search engine.\nPress on the green code icon on top right.\nOption 1: Open with Github Desktop and clone the repo onto a convenient location on your computer.  Option 2: Download the zip file and unzip onto a convenient location on your computer.\nClick on aiti-talk.Rproj to open the project in RStudio.\n\n\n\n\n\n3. ⁠Install all packages\n\nLaunch Rstudio app directly. It will look something like:\n\n\n\n\nSource: Link\n\n\nNote: Previously, we installed both R (language) and Rstudio (IDE). However, all coding can be done in just Rstudio.\n\n\nInstall the following R packages by running the following code in the console pane:\n\n\ninstall.packages(c(\n  \"tidyverse\", \n  \"tinyplot\",\n  \"sf\",\n  \"bruneimap\",\n  \"tidytext\",\n  \"tm\",\n  \"wordcloud\",\n  \"gtsummary\",\n  \"devtools\",\n  \"scales\",\n  \"mvtnorm\",\n  \"titanic\",\n  \"ggthemes\",\n  \"viridis\",\n  \"ggrepel\",\n  \"RColorBrewer\"\n))\n\ndevtools::install_github(\"haleyjeppson/ggmosaic\")\n\n\n\n\n4. Ready to start! 🥳\nQuick Tips\n\nTo work on long chunks of codes, it is recommended to use the source pane by creating a R Script.\nTo create a R Script: File &gt; New File &gt; R Script\nTo run code: press Ctrl + Enter (Windows) or Cmd + Enter (Mac). Alternatively, press run icon (top right) of the source pane.\nTo load libraries for additional functions, run the codes in source pane:\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\nTry it out!\n\nprint(\"Hello, World!\")\n\n[1] \"Hello, World!\"\n\n\n\nplot(pressure)\n\n\n\n\n\n\n\n\nFrom simple printing to complex visualisation, possibilities are now limitless, Happy coding!"
+    "text": "Welcome! Prior to attending the seminar talk, please ensure you have done the following.\n\n1. Install R and RStudio\n\nDownload both software at https://posit.co/download/rstudio-desktop/.\nOnce the download completes, double-click on the .exe file to run the installer. Simply follow the steps of the installer to finish.\n\n\nNote: These are two different softwares, so please ensure you have installed both of them. For more detailed guideline, visit link.\n\n\n\n2. Download Workshop material\n\nVisit https://github.com/haziqj/aiti-talk on your search engine.\nPress on the green code icon on top right.\nOption 1: Open with Github Desktop and clone the repo onto a convenient location on your computer.  Option 2: Download the zip file and unzip onto a convenient location on your computer.\nClick on aiti-talk.Rproj to open the project in RStudio.\n\n\n\n\n\n3. ⁠Install all packages\n\nLaunch Rstudio app directly. It will look something like:\n\n\n\n\nSource: Link\n\n\nNote: Previously, we installed both R (language) and Rstudio (IDE). However, all coding can be done in just Rstudio.\n\n\nInstall the following R packages by running the following code in the console pane:\n\n\ninstall.packages(c(\n  \"tidyverse\", \n  \"tinyplot\",\n  \"sf\",\n  \"bruneimap\",\n  \"tidytext\",\n  \"tm\",\n  \"wordcloud\",\n  \"gtsummary\",\n  \"devtools\",\n  \"scales\",\n  \"mvtnorm\",\n  \"titanic\",\n  \"ggthemes\",\n  \"viridis\",\n  \"ggrepel\",\n  \"RColorBrewer\"\n))\n\ndevtools::install_github(\"haleyjeppson/ggmosaic\")\n\n\n\n\n4. Ready to start! 🥳\nQuick Tips\n\nTo work on long chunks of codes, it is recommended to use the source pane by creating a R Script.\nTo create a R Script: File &gt; New File &gt; R Script\nTo run code: press Ctrl + Enter (Windows) or Cmd + Enter (Mac). Alternatively, press run icon (top right) of the source pane.\nTo load libraries for additional functions, run the codes in source pane:\n\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\n\n\n\nTry it out!\n\nprint(\"Hello, World!\")\n\n[1] \"Hello, World!\"\n\n\n\nplot(pressure)\n\n\n\n\n\n\n\n\nFrom simple printing to complex visualisation, possibilities are now limitless, Happy coding!\n\n\n\nSource: Link"
   },
   {
     "objectID": "R/report.html",
@@ -39,34 +39,55 @@
     "href": "R/report.html#conclusion",
     "title": "Brunei ICT Usage and Expenditure Survey Report",
     "section": "Conclusion",
-    "text": "Conclusion\nThe Brunei ICT Usage and Expenditure Survey 2024 highlights critical differences in ICT usage and expenditure across demographic groups and geographic regions. Findings indicate targeted interventions could effectively address disparities and enhance broadband accessibility and affordability nationwide.\nFuture surveys should continue monitoring these trends, informing evidence-based policy decisions, and optimizing resource allocation for national ICT development."
+    "text": "Conclusion\nThe Brunei ICT Usage and Expenditure Survey 2024 highlights critical differences in ICT usage and expenditure across demographic groups and geographic regions. Findings indicate targeted interventions could effectively address disparities and enhance broadband accessibility and affordability nationwide.\nFuture surveys should continue monitoring these trends, informing evidence-based policy decisions, and optimizing resource allocation for national ICT development.\n\n\n\nFigure 1: Distribution of fixed broadband data usage in Brunei Darussalam.\nFigure 2: Broadband data usage by district.\nFigure 3: Relationship between Monthly Expenditure and Data Usage.\nFigure 4: Monthly ICT Expenditure by Education Level.\nFigure 5: Monthly ICT Expenditure by Mukim."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "R for Data Science",
     "section": "",
-    "text": "Goal is to give an introductory talk about R software and ecosystem, and how it can be useful to produce data products such as reports with tables and visualisations. In particular, I will show how to use R to “reproduce” some elements of the the AITI ICT Survey Report 2022.\nThe format will be lecture style with hands-on “follow along” (code will be provided). There will be two teaching assistants on hand to help out with any questions. Everyone should bring their own laptop with R and RStudio installed.\nNo prior knowledge of R is required."
+    "text": "Welcome to our introductory session on R software and its powerful ecosystem. Learn how R can be used to produce compelling data products, such as reports with rich tables and visualizations.\nWe’ll take a hands-on approach and even explore how to recreate parts of the AITI ICT Survey Report 2022 using R and Quarto."
   },
   {
     "objectID": "index.html#schedule",
     "href": "index.html#schedule",
     "title": "R for Data Science",
-    "section": "Schedule",
-    "text": "Schedule\nDate: Wednesday 21 May 2025\nTime: 8.30am-12.00pm\n\n8.30am–9.00am: Intro & Admin\n9.00am–10.00am: Lecture 1 (Getting started with R and basic statistics)\n10.00am–10.30am: Break\n10.30am–11.30am: Lecture 2 (Reproducible research using Quarto)\n11.30am–12.00pm: Networking"
+    "section": "📅 Schedule",
+    "text": "📅 Schedule\nDate: Wednesday, 21 May 2025\nTime: 8.30am – 12.00pm\n\n\n\n\n\n\n\nTime\nActivity\n\n\n\n\n8.30am – 9.00am\nIntroduction & Admin\n\n\n9.00am – 10.00am\nLecture 1: Getting Started with R + Basic Statistics\n\n\n10.00am – 10.30am\nBreak\n\n\n10.30am – 11.30am\nLecture 2: Reproducible Research with Quarto\n\n\n11.30am – 12.00pm\nNetworking"
   },
   {
     "objectID": "index.html#facilitators",
     "href": "index.html#facilitators",
     "title": "R for Data Science",
-    "section": "Facilitators",
-    "text": "Facilitators\nSpeaker: Dr. Haziq Jamil\nAssistants: 1. Hafeezul Raziq 2. Alvin Bong"
+    "section": "👥 Facilitators",
+    "text": "👥 Facilitators\nSpeaker:\nDr. Haziq Jamil\nAssistants:\n1. Hafeezul Raziq\n2. Alvin Bong"
   },
   {
     "objectID": "index.html#material",
     "href": "index.html#material",
-    "title": "R for Data Science",
+    "title": "AITI Talk",
     "section": "Material",
     "text": "Material\n(To be updated)\n\nInstructions (html, pdf)\nLecture slides\nR code\nSample report"
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "R for Data Science",
+    "section": "",
+    "text": "Welcome to our introductory session on R software and its powerful ecosystem. Learn how R can be used to produce compelling data products, such as reports with rich tables and visualizations.\nWe’ll take a hands-on approach and even explore how to recreate parts of the AITI ICT Survey Report 2022 using R and Quarto."
+  },
+  {
+    "objectID": "index.html#format",
+    "href": "index.html#format",
+    "title": "R for Data Science",
+    "section": "🧑‍🏫 Format",
+    "text": "🧑‍🏫 Format\n\nLecture-style sessions with live coding.\nCode will be provided for participants to follow along.\nTwo teaching assistants will be available for one-on-one help.\n\n💻 Participants must bring a laptop with R and RStudio installed.\n🚫 No prior knowledge of R is required."
+  },
+  {
+    "objectID": "index.html#materials",
+    "href": "index.html#materials",
+    "title": "R for Data Science",
+    "section": "📂 Materials",
+    "text": "📂 Materials\n\nInstructions (html, pdf)\nGithub Repository (Link)\nLecture slides (Link)\nSample report (Link, pdf)\nBasic R Summary/Cheat Sheet (pdf)"
   }
 ]
