@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          Rscript -e 'install.packages(c("devtools", "tidyverse", "tinyplot", "sf", "bruneimap", "tidytext", "tm", "wordcloud","gtsummary", "devtools", "scales", "mvtnorm", "titanic", "ggthemes", "viridis", "ggrepel", "RColorBrewer")); devtools::install_github("haleyjeppson/ggmosaic")'
+          Rscript -e 'install.packages(c("devtools", "tidyverse", "tinyplot", "sf", "bruneimap", "tidytext", "tm", "wordcloud","gtsummary", "devtools", "scales", "mvtnorm", "titanic", "ggthemes", "viridis", "ggrepel", "RColorBrewer"), dependencies = TRUE); devtools::install_github("haleyjeppson/ggmosaic")'
 
       - name: Run analysis script
         run: |
