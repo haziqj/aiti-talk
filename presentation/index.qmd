@@ -1143,7 +1143,7 @@ It enables you to create dynamic documents, reports, presentations, and websites
 
 > **DEMO** See report.qmd file
 
-# Ending
+# Ending {.transition-slide-ubdrubydeep}
 
 ## Where to go from here?
 
@@ -1156,4 +1156,6 @@ It enables you to create dynamic documents, reports, presentations, and websites
 ![](https://r4ds.hadley.nz/diagrams/data-science/base.png){fig-align="center" width=90%}
 
 
+# Thanks! {.transition-slide-ubdrubydeep}
 
+Questions?
