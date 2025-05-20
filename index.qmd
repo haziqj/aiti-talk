@@ -24,7 +24,7 @@ We'll take a hands-on approach and even explore how to **recreate parts of the A
 **Time:** 8.30am -- 12.00pm
 
 | Time               | Activity                                             |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | 8.30am -- 9.00am   | Introduction & Admin                                 |
 | 9.00am -- 10.00am  | Lecture 1: Getting Started with R + Basic Statistics |
 | 10.00am -- 10.30am | Break                                                |
@@ -37,13 +37,44 @@ We'll take a hands-on approach and even explore how to **recreate parts of the A
 [Dr. Haziq Jamil](https://haziqj.ml/)
 
 **Assistants:**\
-1. [Hafeezul Raziq](https://hafeezulrzq.github.io/) \
+1. [Hafeezul Raziq](https://hafeezulrzq.github.io/)\
 2. [Alvin Bong](https://alvinbjl.github.io/)
 
 ## 📂 Materials
 
 1.  Instructions ([html](https://haziqj.ml/aiti-talk/instructions/), [pdf](https://haziqj.ml/aiti-talk/instructions/instructions.pdf))
 2.  Github Repository ([Link](https://github.com/haziqj/aiti-talk))
-2.  Lecture slides ([Link](https://github.com/haziqj/aiti-talk/presentation/))
+3.  Lecture slides ([Link](https://github.com/haziqj/aiti-talk/presentation/))
 4.  Sample report ([Link](https://haziqj.ml/aiti-talk/R/report.html), [pdf](https://haziqj.ml/aiti-talk/R/report.pdf))
-5. Basic R Summary/Cheat Sheet ([pdf](https://haziqj.ml/aiti-talk/aiti-talk-basic-r-summary.pdf))
+5.  Basic R Summary/Cheat Sheet ([pdf](https://haziqj.ml/aiti-talk/aiti-talk-basic-r-summary.pdf))
+
+## 🖥️ More of R & Statistics
+
+Explore these resources to continue your journey with R:
+
+### 📚 Learning Opportunities
+
+- [UBD ILIA – Data Analysis for Leaders and Managers](https://ilia.ubd.edu.bn/programmes/data-analysis-for-leaders-and-managers/)  \
+  A short course designed to help professionals apply data analysis techniques for decision-making in leadership roles.
+
+- [UBD C3L – Digital Economy Courses](https://c3l.ubd.edu.bn/courses-and-programmes/14-week-courses-and-bachelor-of-science-in-digital-economy-bsc/)  \
+  Includes 14-week micro-credential courses and degree programmes focused on data, digital tools, and economic insights.
+
+- [Brunei R User Group](https://bruneir.github.io/) \
+A local community of R users and data enthusiasts in Brunei.
+Brunei R User Group conduct workshops and talks to share knowledge and explore data together.
+
+------------------------------------------------------------------------
+
+### 🌐 Online Resources
+
+-   [R for Data Science (2e)](https://r4ds.hadley.nz/)\
+    A modern, beginner-friendly book to help you learn R for data wrangling, visualization, and analysis using the tidyverse.
+
+-   [Quarto.org](https://quarto.org)\
+    The official site for Quarto, used to create reproducible documents, websites, blogs, dashboards, and more using R.
+
+-   [R Graph Gallery](https://r-graph-gallery.com/)\
+    A rich collection of ready-to-use R visualizations with code examples, great for learning and inspiration.
+
+and many more...

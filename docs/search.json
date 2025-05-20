@@ -82,5 +82,19 @@
     "title": "R for Data Science",
     "section": "📂 Materials",
     "text": "📂 Materials\n\nInstructions (html, pdf)\nGithub Repository (Link)\nLecture slides (Link)\nSample report (Link, pdf)\nBasic R Summary/Cheat Sheet (pdf)"
+  },
+  {
+    "objectID": "index.html#more-of-r",
+    "href": "index.html#more-of-r",
+    "title": "R for Data Science",
+    "section": "🖥️ More of R",
+    "text": "🖥️ More of R\nExplore these resources to continue your journey with R:\n\n📚 Learning Opportunities\n\nUBD ILIA – Data Analysis for Leaders and Managers\nA short course designed to help professionals apply data analysis techniques for decision-making in leadership roles.\nUBD C3L – Digital Economy Courses\nIncludes 14-week micro-credential courses and degree programmes focused on data, digital tools, and economic insights.\nBrunei R User Group\nA local community of R users and data enthusiasts in Brunei. Brunei R User Group conduct workshops and talks to share knowledge and explore data together.\n\n\n\n\n🌐 Online Resources\n\nR for Data Science (2e)\nA modern, beginner-friendly book to help you learn R for data wrangling, visualization, and analysis using the tidyverse.\nQuarto.org\nThe official site for Quarto, used to create reproducible documents, websites, blogs, dashboards, and more using R.\nR Graph Gallery\nA rich collection of ready-to-use R visualizations with code examples, great for learning and inspiration.\n\nand many more…"
+  },
+  {
+    "objectID": "index.html#more-of-r-statistics",
+    "href": "index.html#more-of-r-statistics",
+    "title": "R for Data Science",
+    "section": "🖥️ More of R & Statistics",
+    "text": "🖥️ More of R & Statistics\nExplore these resources to continue your journey with R:\n\n📚 Learning Opportunities\n\nUBD ILIA – Data Analysis for Leaders and Managers\nA short course designed to help professionals apply data analysis techniques for decision-making in leadership roles.\nUBD C3L – Digital Economy Courses\nIncludes 14-week micro-credential courses and degree programmes focused on data, digital tools, and economic insights.\nBrunei R User Group\nA local community of R users and data enthusiasts in Brunei. Brunei R User Group conduct workshops and talks to share knowledge and explore data together.\n\n\n\n\n🌐 Online Resources\n\nR for Data Science (2e)\nA modern, beginner-friendly book to help you learn R for data wrangling, visualization, and analysis using the tidyverse.\nQuarto.org\nThe official site for Quarto, used to create reproducible documents, websites, blogs, dashboards, and more using R.\nR Graph Gallery\nA rich collection of ready-to-use R visualizations with code examples, great for learning and inspiration.\n\nand many more…"
   }
 ]
